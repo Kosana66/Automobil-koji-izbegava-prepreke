@@ -1,0 +1,7 @@
+Removed Pin From Net: NetName=MCLR Pin=S2-3
+Removed Pin From Net: NetName=GND Pin=S2-4
+Change Component Footprint: Designator=C1 Old Footprint=RB7.6-15 New Footprint=Capacitor
+Change Component Footprint: Designator=C2 Old Footprint=RB7.6-15 New Footprint=Capacitor
+Change Component Footprint: Designator=C5 Old Footprint=RB7.6-15 New Footprint=Capacitor
+Change Component Footprint: Designator=C6 Old Footprint=RB7.6-15 New Footprint=Capacitor
+Added Room: Name=schematic

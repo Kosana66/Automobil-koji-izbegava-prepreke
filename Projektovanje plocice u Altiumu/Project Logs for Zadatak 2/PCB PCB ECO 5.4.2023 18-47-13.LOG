@@ -1,0 +1,5 @@
+Removed Pin From Net: NetName=MCLR Pin=S2-3
+Removed Pin From Net: NetName=GND Pin=S2-4
+Change Net Name : Old Net Name=ECHO1 New Net Name=TRIG1
+Change Net Name : Old Net Name=ECHO2 New Net Name=TRIG2
+Added Room: Name=schematic

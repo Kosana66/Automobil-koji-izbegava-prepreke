@@ -1,0 +1,5 @@
+Removed Pin From Net: NetName=TRIG1 Pin=IC2-10
+Removed Pin From Net: NetName=TRIG2 Pin=IC2-24
+Added Pin To Net: NetName=TRIG1 Pin=IC2-18
+Added Pin To Net: NetName=TRIG2 Pin=IC2-22
+Added Room: Name=schematic
