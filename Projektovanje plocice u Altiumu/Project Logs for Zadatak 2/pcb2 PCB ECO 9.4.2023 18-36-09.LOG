@@ -1,0 +1,16 @@
+Change Component Footprint: Designator=RsenseA Old Footprint=Axial 1.8 New Footprint=OTP
+Change Component Footprint: Designator=RsenseB Old Footprint=Axial 1.8 New Footprint=OTP
+Change Component Footprint: Designator=R1 Old Footprint=AXIAL-0.3 New Footprint=OTP
+Change Component Footprint: Designator=R2 Old Footprint=AXIAL-0.3 New Footprint=OTP
+Change Component Footprint: Designator=R3 Old Footprint=AXIAL-0.3 New Footprint=OTP
+Change Component Footprint: Designator=R4 Old Footprint=AXIAL-0.3 New Footprint=OTP
+Change Component Footprint: Designator=D1 Old Footprint=DO-41 New Footprint=DIOD
+Change Component Footprint: Designator=D3 Old Footprint=DO-41 New Footprint=DIOD
+Change Component Footprint: Designator=D4 Old Footprint=DO-41 New Footprint=DIOD
+Change Component Footprint: Designator=D5 Old Footprint=DO-41 New Footprint=DIOD
+Change Component Footprint: Designator=D6 Old Footprint=DO-41 New Footprint=DIOD
+Change Component Footprint: Designator=D7 Old Footprint=DO-41 New Footprint=DIOD
+Change Component Footprint: Designator=D8 Old Footprint=DO-41 New Footprint=DIOD
+Change Component Footprint: Designator=D9 Old Footprint=DO-41 New Footprint=DIOD
+Change Component Footprint: Designator=D10 Old Footprint=DO-41 New Footprint=DIOD
+Added Room: Name=schematic
