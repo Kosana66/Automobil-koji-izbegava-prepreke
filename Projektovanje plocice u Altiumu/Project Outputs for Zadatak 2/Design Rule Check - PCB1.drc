@@ -1,7 +1,7 @@
 Protel Design System Design Rule Check
-PCB File : D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\PCB.PcbDoc
-Date     : 15.4.2023
-Time     : 0:25:47
+PCB File : D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\PCB1.PcbDoc
+Date     : 14.4.2023
+Time     : 23:52:03
 
 Processing Rule : Clearance Constraint (Gap=0.254mm) (All),(All)
 Rule Violations :0
@@ -22,8 +22,7 @@ Processing Rule : Power Plane Connect Rule(Relief Connect )(Expansion=0.508mm) (
 Rule Violations :0
 
 Processing Rule : Hole Size Constraint (Min=0.025mm) (Max=2.54mm) (All)
-   Violation between Hole Size Constraint: (4mm > 2.54mm) Pad Free-2(58.877mm,42.418mm) on Multi-Layer Actual Hole Size = 4mm
-Rule Violations :1
+Rule Violations :0
 
 Processing Rule : Hole To Hole Clearance (Gap=0.254mm) (All),(All)
 Rule Violations :0
@@ -44,5 +43,5 @@ Processing Rule : Height Constraint (Min=0mm) (Max=25.4mm) (Prefered=12.7mm) (Al
 Rule Violations :0
 
 
-Violations Detected : 1
-Time Elapsed        : 00:00:02
+Violations Detected : 0
+Time Elapsed        : 00:00:01
