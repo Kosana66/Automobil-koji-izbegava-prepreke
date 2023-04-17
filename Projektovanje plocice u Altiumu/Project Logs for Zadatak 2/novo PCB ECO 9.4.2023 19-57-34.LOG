@@ -1,0 +1,3 @@
+Removed Pin From Net: NetName=MCLR Pin=S2-3
+Removed Pin From Net: NetName=GND Pin=S2-4
+Added Room: Name=schematic

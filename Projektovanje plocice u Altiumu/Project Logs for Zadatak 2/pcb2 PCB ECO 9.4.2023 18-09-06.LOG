@@ -1,0 +1,16 @@
+Removed Pin From Net: NetName=MCLR Pin=S2-3
+Removed Pin From Net: NetName=GND Pin=S2-4
+Change Component Footprint: Designator=C3 Old Footprint=RAD-0.3 New Footprint=Cappp
+Change Component Footprint: Designator=C4 Old Footprint=RAD-0.3 New Footprint=Cappp
+Change Component Footprint: Designator=C7 Old Footprint=RAD-0.3 New Footprint=Cappp
+Change Component Footprint: Designator=C8 Old Footprint=RAD-0.3 New Footprint=Cappp
+Change Component Footprint: Designator=C9 Old Footprint=RAD-0.3 New Footprint=Cappp
+Change Component Footprint: Designator=C10 Old Footprint=RAD-0.3 New Footprint=Cappp
+Change Component Footprint: Designator=C11 Old Footprint=RAD-0.3 New Footprint=Cappp
+Change Component Footprint: Designator=C12 Old Footprint=RAD-0.3 New Footprint=Cappp
+Change Component Footprint: Designator=C13 Old Footprint=RAD-0.3 New Footprint=Cappp
+Change Component Footprint: Designator=C14 Old Footprint=RAD-0.3 New Footprint=Cappp
+Change Component Footprint: Designator=C15 Old Footprint=RAD-0.3 New Footprint=Cappp
+Change Component Footprint: Designator=C16 Old Footprint=RAD-0.3 New Footprint=Cappp
+Added Member To Class: ClassName=schematic Member=Component P13 FT232
+Added Room: Name=schematic

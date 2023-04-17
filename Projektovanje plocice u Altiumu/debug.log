@@ -39,3 +39,10 @@
 [0405/180842:INFO:CONSOLE(0)] "The source list for Content Security Policy directive 'script-src' contains an invalid source: ''report-sample''. It will be ignored.", source: https://www.altium.com/ad-start/ (0)
 [0405/180842:INFO:CONSOLE(0)] "Unrecognized Content-Security-Policy directive 'worker-src'.
 ", source: https://www.altium.com/ad-start/ (0)
+[0414/135155:INFO:CONSOLE(0)] "Unrecognized Content-Security-Policy directive 'prefetch-src'.
+", source: https://www.altium.com/ad-start/ (0)
+[0414/135155:INFO:CONSOLE(0)] "The source list for Content Security Policy directive 'script-src' contains an invalid source: ''report-sample''. It will be ignored.", source: https://www.altium.com/ad-start/ (0)
+[0414/135155:INFO:CONSOLE(0)] "Unrecognized Content-Security-Policy directive 'worker-src'.
+", source: https://www.altium.com/ad-start/ (0)
+[0417/161809:WARNING:dns_config_service_win.cc(665)] Failed to read DnsConfig.
+[0417/161810:WARNING:dns_config_service_win.cc(665)] Failed to read DnsConfig.

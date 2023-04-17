@@ -1,0 +1,764 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+			padding: 0.3em;
+		}
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+		body {
+			font-family : segoe ui;
+		}
+
+		td, th {
+			padding: 0.5em;
+			text-align : left;
+			width: 10em;
+		}
+		th {
+			background-color : #EEEEEE;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+			font-size: 0.9em;
+		}
+
+		.DRC_summary_header {
+			padding-bottom : 0.1em;
+			border : 0px solid black;
+			width: 100%;
+			align: left;
+		}
+
+		.DRC_summary_header_col1,
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3 {
+			color : black;
+			font-size:100%;
+			padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2em;
+			border : 0px solid black;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.DRC_summary_header_col1 {
+			font-weight: bold;
+			width: 8em;
+		}
+
+		.DRC_summary_header_col2 {
+			width: 0.1em;
+		
+		}
+
+		.DRC_summary_header_col3 {
+			width : auto;
+		}
+
+		.header_holder {
+		    Width = 100%;
+		    border = 0px solid green;
+		    padding = 0;
+		}
+
+
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+		{
+			left : 0;
+			top : 0;
+			padding: 0em;
+			padding-top : 0.1em;
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.front_matter_column1 {
+			width : 8em;
+			font-weight: bold;
+		}
+
+		.front_matter_column2 {
+			width: 0.1em;
+		}
+
+		.front_matter_column3 {
+			width : auto;
+		}
+
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : left;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #white;
+		}
+		tr.onmouseout_even { 
+			background-color : #FAFAFA;
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #21489e;
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://C:\Users\Public\Documents\Altium\AD17\Templates\AD_logo.png
+		"><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td class="column1">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">9.4.2023</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">19:53:22</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:01</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc" class="file"><acronym title="D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc">D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td class="column2">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3">0</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">144</td></tr>
+</table>
+</td>
+</table><a name="IDDTXB5PWHYAGHIIK5FPWWROAGPLW00EWHL3PUEFBHOGJE1JVP2HGG"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">0</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDZW3BHAP0XHDTIVYA2OOGLYMIOIFNOHRS2VXYXLEYMTN12M33IPBD">Clearance Constraint (Gap=0.2mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDLOIPHZQGVUROBD3S51BG5HJJ1ICUOWWHWFMCDECND4X2TPADD4XH">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDRUEXPJ1NUXPHKMC5Y0UZSRTFWO11CLQTGSLS5NG2SI0UWWFVJJAP">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">141</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDUD5TJUD1MHKLKBYY4UOBKHMMKKKXL0EVHOSUHRNQE4I5TLVSD5VM">Modified Polygon (Allow modified: No), (Allow shelved: No)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDLSKWXR2FGAFQD220E4ECTQFE4BXPJOLVC2BJGIFU0WVPF512XJGI">Width Constraint (Min=1.016mm) (Max=1.016mm) (Preferred=1.016mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID1004VHOYMHHVGCCTE31IIZS5EP1XLFOPFP3DSKCQ25YB4IMFIKLD">Power Plane Connect Rule(Relief Connect )(Expansion=0.508mm) (Conductor Width=0.254mm) (Air Gap=0.254mm) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDAX1JZRHF5T2SE35UNGPQ5ZFRKDEZRDZICQNNLAPP3R5UFNVWYDVG">Hole Size Constraint (Min=0.025mm) (Max=2.54mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDKCDRA4J0IXMFKYQCXVD1TPXCEJAY34TSPLMBR0NXEWOUFKJA5GOF">Hole To Hole Clearance (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDVAKKKO5XJK5VIGUOQU55HSSDREJ4UR2RJ1XWZ0OKJKG0PYSAWYQO">Minimum Solder Mask Sliver (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID5MUWZP1SXAWHHTZV2R0GEDITCIHCADPCITTYG4F4V0Z1BCZI3KFM">Silk To Solder Mask (Clearance=0.254mm) (IsPad),(All)</a></td>
+<td class="column2">3</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID33U1PLPLPWV2GCIYKDFG3BDUBGIGJ1U4FWAVM5DLWCLB1U1Q12UC">Silk to Silk (Clearance=0.254mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDRUBCHXABPOZ3EH0ST3KMWGTZPGBVPX5WASRKXLF30XWPUASKI0DC">Net Antennae (Tolerance=0mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDYX3SFI1LJT0HENBKAKFQEC2DCFGNRHFBT5YFS2IYR5FZNZWMQMRI">Height Constraint (Min=0mm) (Max=25.4mm) (Prefered=12.7mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">144</td>
+</tr>
+</table><br><a name="IDRUEXPJ1NUXPHKMC5Y0UZSRTFWO11CLQTGSLS5NG2SI0UWWFVJJAP"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Un-Routed Net Constraint ( (All) )</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11303.5mil|Location2.X=11561.5mil|Location1.Y=3077.398mil|Location2.Y=3130.398mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11303.5mil|Location2.X=11561.5mil|Location1.Y=3077.398mil|Location2.Y=3130.398mil|Absolute=True">Un-Routed Net Constraint: Net VCC Between Pad D3-2(288.163mm,78.839mm) on Multi-Layer And Pad D4-2(292.608mm,78.839mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11478.5mil|Location2.X=11736.5mil|Location1.Y=3077.398mil|Location2.Y=3130.398mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11478.5mil|Location2.X=11736.5mil|Location1.Y=3077.398mil|Location2.Y=3130.398mil|Absolute=True">Un-Routed Net Constraint: Net VCC Between Pad D4-2(292.608mm,78.839mm) on Multi-Layer And Pad D5-2(297.053mm,78.839mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11653.5mil|Location2.X=11911.5mil|Location1.Y=3077.398mil|Location2.Y=3130.398mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11653.5mil|Location2.X=11911.5mil|Location1.Y=3077.398mil|Location2.Y=3130.398mil|Absolute=True">Un-Routed Net Constraint: Net VCC Between Pad D5-2(297.053mm,78.839mm) on Multi-Layer And Pad D6-2(301.498mm,78.839mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10987.496mil|Location2.X=11386.5mil|Location1.Y=3059.661mil|Location2.Y=3150.339mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10987.496mil|Location2.X=11386.5mil|Location1.Y=3059.661mil|Location2.Y=3150.339mil|Absolute=True">Un-Routed Net Constraint: Net VCC Between Pad C15-2(279.784mm,78.867mm) on Multi-Layer And Pad D3-2(288.163mm,78.839mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=22220.646mil|Location2.X=22831.5mil|Location1.Y=2438.323mil|Location2.Y=2992.602mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=22220.646mil|Location2.X=22831.5mil|Location1.Y=2438.323mil|Location2.Y=2992.602mil|Absolute=True">Un-Routed Net Constraint: Net VCC Between Pad S1-2(568.706mm,64.135mm) on Multi-Layer And Pad D1-1(578.866mm,75.339mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10116mil|Location2.X=11042.74mil|Location1.Y=2925mil|Location2.Y=3150.339mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10116mil|Location2.X=11042.74mil|Location1.Y=2925mil|Location2.Y=3150.339mil|Absolute=True">Un-Routed Net Constraint: Net VCC Between Pad IC3-4(258.064mm,75.184mm) on Multi-Layer And Pad C15-2(279.784mm,78.867mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11828.5mil|Location2.X=13122.74mil|Location1.Y=3059.661mil|Location2.Y=3150.339mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11828.5mil|Location2.X=13122.74mil|Location1.Y=3059.661mil|Location2.Y=3150.339mil|Absolute=True">Un-Routed Net Constraint: Net VCC Between Pad D6-2(301.498mm,78.839mm) on Multi-Layer And Pad C12-2(332.616mm,78.867mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13067.496mil|Location2.X=22831.5mil|Location1.Y=2939.602mil|Location2.Y=3150.339mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13067.496mil|Location2.X=22831.5mil|Location1.Y=2939.602mil|Location2.Y=3150.339mil|Absolute=True">Un-Routed Net Constraint: Net VCC Between Pad C12-2(332.616mm,78.867mm) on Multi-Layer And Pad D1-1(578.866mm,75.339mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=14042mil|Location2.X=14984mil|Location1.Y=1731.5mil|Location2.Y=3140.398mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=14042mil|Location2.X=14984mil|Location1.Y=1731.5mil|Location2.Y=3140.398mil|Absolute=True">Un-Routed Net Constraint: Net U2TX Between Pad IC2-27(358.267mm,44.831mm) on Multi-Layer And Pad R3-2(379.857mm,78.585mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=12226.472mil|Location2.X=14168mil|Location1.Y=1731.5mil|Location2.Y=2748.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=12226.472mil|Location2.X=14168mil|Location1.Y=1731.5mil|Location2.Y=2748.528mil|Absolute=True">Un-Routed Net Constraint: Net U2TX Between Pad P13-2(311.404mm,68.961mm) on Multi-Layer And Pad IC2-27(358.267mm,44.831mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=14042mil|Location2.X=15538.528mil|Location1.Y=1831.5mil|Location2.Y=2948.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=14042mil|Location2.X=15538.528mil|Location1.Y=1831.5mil|Location2.Y=2948.528mil|Absolute=True">Un-Routed Net Constraint: Net U2RX Between Pad IC2-28(358.267mm,47.371mm) on Multi-Layer And Pad P9-4(393.827mm,74.041mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=12226.472mil|Location2.X=14168mil|Location1.Y=1831.5mil|Location2.Y=2848.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=12226.472mil|Location2.X=14168mil|Location1.Y=1831.5mil|Location2.Y=2848.528mil|Absolute=True">Un-Routed Net Constraint: Net U2RX Between Pad P13-3(311.404mm,71.501mm) on Multi-Layer And Pad IC2-28(358.267mm,47.371mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=12001.472mil|Location2.X=13568mil|Location1.Y=1631.5mil|Location2.Y=2748.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=12001.472mil|Location2.X=13568mil|Location1.Y=1631.5mil|Location2.Y=2748.528mil|Absolute=True">Un-Routed Net Constraint: Net U1ATX Between Pad P12-2(305.689mm,68.961mm) on Multi-Layer And Pad IC2-15(343.027mm,42.291mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=12001.472mil|Location2.X=13568mil|Location1.Y=1531.5mil|Location2.Y=2848.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=12001.472mil|Location2.X=13568mil|Location1.Y=1531.5mil|Location2.Y=2848.528mil|Absolute=True">Un-Routed Net Constraint: Net U1ARX Between Pad P12-3(305.689mm,71.501mm) on Multi-Layer And Pad IC2-16(343.027mm,39.751mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=14042mil|Location2.X=16853.528mil|Location1.Y=1231.5mil|Location2.Y=2948.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=14042mil|Location2.X=16853.528mil|Location1.Y=1231.5mil|Location2.Y=2948.528mil|Absolute=True">Un-Routed Net Constraint: Net TRIG2 Between Pad IC2-22(358.267mm,32.131mm) on Multi-Layer And Pad P8-2(427.228mm,74.041mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13442mil|Location2.X=16683.528mil|Location1.Y=1331.5mil|Location2.Y=2948.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13442mil|Location2.X=16683.528mil|Location1.Y=1331.5mil|Location2.Y=2948.528mil|Absolute=True">Un-Routed Net Constraint: Net TRIG1 Between Pad IC2-18(343.027mm,34.671mm) on Multi-Layer And Pad P7-2(422.91mm,74.041mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13442mil|Location2.X=21568.528mil|Location1.Y=2431.5mil|Location2.Y=3148.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13442mil|Location2.X=21568.528mil|Location1.Y=2431.5mil|Location2.Y=3148.528mil|Absolute=True">Un-Routed Net Constraint: Net RB5 Between Pad IC2-7(343.027mm,62.611mm) on Multi-Layer And Pad P4-6(546.989mm,79.121mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13442mil|Location2.X=21568.528mil|Location1.Y=2531.5mil|Location2.Y=3048.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13442mil|Location2.X=21568.528mil|Location1.Y=2531.5mil|Location2.Y=3048.528mil|Absolute=True">Un-Routed Net Constraint: Net RB4 Between Pad IC2-6(343.027mm,65.151mm) on Multi-Layer And Pad P4-5(546.989mm,76.581mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8991.472mil|Location2.X=10004mil|Location1.Y=2375mil|Location2.Y=3048.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8991.472mil|Location2.X=10004mil|Location1.Y=2375mil|Location2.Y=3048.528mil|Absolute=True">Un-Routed Net Constraint: Net RB3 Between Pad P21-1(229.235mm,76.581mm) on Multi-Layer And Pad IC3-15(252.984mm,61.214mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9916mil|Location2.X=13568mil|Location1.Y=2375mil|Location2.Y=2698.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9916mil|Location2.X=13568mil|Location1.Y=2375mil|Location2.Y=2698.5mil|Absolute=True">Un-Routed Net Constraint: Net RB3 Between Pad IC3-15(252.984mm,61.214mm) on Multi-Layer And Pad IC2-5(343.027mm,67.691mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13442mil|Location2.X=21568.528mil|Location1.Y=2631.5mil|Location2.Y=2948.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13442mil|Location2.X=21568.528mil|Location1.Y=2631.5mil|Location2.Y=2948.528mil|Absolute=True">Un-Routed Net Constraint: Net RB3 Between Pad IC2-5(343.027mm,67.691mm) on Multi-Layer And Pad P4-4(546.989mm,74.041mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8761.472mil|Location2.X=10004mil|Location1.Y=2981.472mil|Location2.Y=3145mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8761.472mil|Location2.X=10004mil|Location1.Y=2981.472mil|Location2.Y=3145mil|Absolute=True">Un-Routed Net Constraint: Net RB2 Between Pad P20-1(223.393mm,76.581mm) on Multi-Layer And Pad IC3-1(252.984mm,78.994mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9916mil|Location2.X=13568mil|Location1.Y=2731.5mil|Location2.Y=3145mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9916mil|Location2.X=13568mil|Location1.Y=2731.5mil|Location2.Y=3145mil|Absolute=True">Un-Routed Net Constraint: Net RB2 Between Pad IC3-1(252.984mm,78.994mm) on Multi-Layer And Pad IC2-4(343.027mm,70.231mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13442mil|Location2.X=21568.528mil|Location1.Y=2731.5mil|Location2.Y=2848.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13442mil|Location2.X=21568.528mil|Location1.Y=2731.5mil|Location2.Y=2848.528mil|Absolute=True">Un-Routed Net Constraint: Net RB2 Between Pad IC2-4(343.027mm,70.231mm) on Multi-Layer And Pad P4-3(546.989mm,71.501mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13442mil|Location2.X=15298mil|Location1.Y=2831.5mil|Location2.Y=3100mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13442mil|Location2.X=15298mil|Location1.Y=2831.5mil|Location2.Y=3100mil|Absolute=True">Un-Routed Net Constraint: Net RB1 Between Pad IC2-3(343.027mm,72.771mm) on Multi-Layer And Pad P14-3(386.969mm,77.851mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=15172mil|Location2.X=21568.528mil|Location1.Y=2681.472mil|Location2.Y=3100mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=15172mil|Location2.X=21568.528mil|Location1.Y=2681.472mil|Location2.Y=3100mil|Absolute=True">Un-Routed Net Constraint: Net RB1 Between Pad P14-3(386.969mm,77.851mm) on Multi-Layer And Pad P4-2(546.989mm,68.961mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13442mil|Location2.X=21568.528mil|Location1.Y=2581.472mil|Location2.Y=2998.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13442mil|Location2.X=21568.528mil|Location1.Y=2581.472mil|Location2.Y=2998.5mil|Absolute=True">Un-Routed Net Constraint: Net RB0 Between Pad IC2-2(343.027mm,75.311mm) on Multi-Layer And Pad P4-1(546.989mm,66.421mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11131.472mil|Location2.X=13568mil|Location1.Y=2331.5mil|Location2.Y=2948.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11131.472mil|Location2.X=13568mil|Location1.Y=2331.5mil|Location2.Y=2948.528mil|Absolute=True">Un-Routed Net Constraint: Net PGD Between Pad P2-4(283.591mm,74.041mm) on Multi-Layer And Pad IC2-8(343.027mm,60.071mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11131.472mil|Location2.X=13568mil|Location1.Y=2231.5mil|Location2.Y=3048.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11131.472mil|Location2.X=13568mil|Location1.Y=2231.5mil|Location2.Y=3048.528mil|Absolute=True">Un-Routed Net Constraint: Net PGC Between Pad P2-5(283.591mm,76.581mm) on Multi-Layer And Pad IC2-9(343.027mm,57.531mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8363.5mil|Location2.X=9520mil|Location1.Y=2942mil|Location2.Y=3130.398mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8363.5mil|Location2.X=9520mil|Location1.Y=2942mil|Location2.Y=3130.398mil|Absolute=True">Un-Routed Net Constraint: Net Out4 Between Pad D10-2(213.487mm,78.839mm) on Multi-Layer And Pad P11-2(240.919mm,76.327mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9450mil|Location2.X=10204mil|Location1.Y=2425mil|Location2.Y=3068mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9450mil|Location2.X=10204mil|Location1.Y=2425mil|Location2.Y=3068mil|Absolute=True">Un-Routed Net Constraint: Net Out4 Between Pad P11-2(240.919mm,76.327mm) on Multi-Layer And Pad IC3-14(258.064mm,62.484mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10116mil|Location2.X=11911.5mil|Location1.Y=2425mil|Location2.Y=2992.602mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10116mil|Location2.X=11911.5mil|Location1.Y=2425mil|Location2.Y=2992.602mil|Absolute=True">Un-Routed Net Constraint: Net Out4 Between Pad IC3-14(258.064mm,62.484mm) on Multi-Layer And Pad D6-1(301.498mm,75.339mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8588.5mil|Location2.X=9320mil|Location1.Y=2942mil|Location2.Y=3130.398mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8588.5mil|Location2.X=9320mil|Location1.Y=2942mil|Location2.Y=3130.398mil|Absolute=True">Un-Routed Net Constraint: Net Out3 Between Pad D9-2(219.202mm,78.839mm) on Multi-Layer And Pad P11-1(235.839mm,76.327mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9250mil|Location2.X=10004mil|Location1.Y=2475mil|Location2.Y=3068mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9250mil|Location2.X=10004mil|Location1.Y=2475mil|Location2.Y=3068mil|Absolute=True">Un-Routed Net Constraint: Net Out3 Between Pad P11-1(235.839mm,76.327mm) on Multi-Layer And Pad IC3-13(252.984mm,63.754mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9916mil|Location2.X=11736.5mil|Location1.Y=2475mil|Location2.Y=2992.602mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9916mil|Location2.X=11736.5mil|Location1.Y=2475mil|Location2.Y=2992.602mil|Absolute=True">Un-Routed Net Constraint: Net Out3 Between Pad IC3-13(252.984mm,63.754mm) on Multi-Layer And Pad D5-1(297.053mm,75.339mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9916mil|Location2.X=10740mil|Location1.Y=2942mil|Location2.Y=3068mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9916mil|Location2.X=10740mil|Location1.Y=2942mil|Location2.Y=3068mil|Absolute=True">Un-Routed Net Constraint: Net Out2 Between Pad IC3-3(252.984mm,76.454mm) on Multi-Layer And Pad P10-2(271.907mm,76.327mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10670mil|Location2.X=11561.5mil|Location1.Y=2939.602mil|Location2.Y=3068mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10670mil|Location2.X=11561.5mil|Location1.Y=2939.602mil|Location2.Y=3068mil|Absolute=True">Un-Routed Net Constraint: Net Out2 Between Pad P10-2(271.907mm,76.327mm) on Multi-Layer And Pad D4-1(292.608mm,75.339mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8188.5mil|Location2.X=10004mil|Location1.Y=2975mil|Location2.Y=3130.398mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8188.5mil|Location2.X=10004mil|Location1.Y=2975mil|Location2.Y=3130.398mil|Absolute=True">Un-Routed Net Constraint: Net Out2 Between Pad D8-2(209.042mm,78.839mm) on Multi-Layer And Pad IC3-3(252.984mm,76.454mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10116mil|Location2.X=10540mil|Location1.Y=2942mil|Location2.Y=3095mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10116mil|Location2.X=10540mil|Location1.Y=2942mil|Location2.Y=3095mil|Absolute=True">Un-Routed Net Constraint: Net Out1 Between Pad IC3-2(258.064mm,77.724mm) on Multi-Layer And Pad P10-1(266.827mm,76.327mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10470mil|Location2.X=11386.5mil|Location1.Y=2939.602mil|Location2.Y=3068mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10470mil|Location2.X=11386.5mil|Location1.Y=2939.602mil|Location2.Y=3068mil|Absolute=True">Un-Routed Net Constraint: Net Out1 Between Pad P10-1(266.827mm,76.327mm) on Multi-Layer And Pad D3-1(288.163mm,75.339mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8013.5mil|Location2.X=10204mil|Location1.Y=3025mil|Location2.Y=3130.398mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8013.5mil|Location2.X=10204mil|Location1.Y=3025mil|Location2.Y=3130.398mil|Absolute=True">Un-Routed Net Constraint: Net Out1 Between Pad D7-2(204.597mm,78.839mm) on Multi-Layer And Pad IC3-2(258.064mm,77.724mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13207.26mil|Location2.X=14388mil|Location1.Y=2798.937mil|Location2.Y=3150.339mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13207.26mil|Location2.X=14388mil|Location1.Y=2798.937mil|Location2.Y=3150.339mil|Absolute=True">Un-Routed Net Constraint: Net OSC2 Between Pad C9-1(336.166mm,78.867mm) on Multi-Layer And Pad Y1-1(363.855mm,71.982mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13207.26mil|Location2.X=13568mil|Location1.Y=1731.5mil|Location2.Y=3150.339mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13207.26mil|Location2.X=13568mil|Location1.Y=1731.5mil|Location2.Y=3150.339mil|Absolute=True">Un-Routed Net Constraint: Net OSC2 Between Pad C9-1(336.166mm,78.867mm) on Multi-Layer And Pad IC2-14(343.027mm,44.831mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=14262mil|Location2.X=14722.504mil|Location1.Y=2991.063mil|Location2.Y=3150.339mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=14262mil|Location2.X=14722.504mil|Location1.Y=2991.063mil|Location2.Y=3150.339mil|Absolute=True">Un-Routed Net Constraint: Net OSC1 Between Pad Y1-2(363.855mm,76.862mm) on Multi-Layer And Pad C8-1(373.25mm,78.867mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13442mil|Location2.X=14388mil|Location1.Y=1831.5mil|Location2.Y=3061.063mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13442mil|Location2.X=14388mil|Location1.Y=1831.5mil|Location2.Y=3061.063mil|Absolute=True">Un-Routed Net Constraint: Net OSC1 Between Pad IC2-13(343.027mm,47.371mm) on Multi-Layer And Pad Y1-2(363.855mm,76.862mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7667mil|Location2.X=9058.528mil|Location1.Y=1134.685mil|Location2.Y=3148.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7667mil|Location2.X=9058.528mil|Location1.Y=1134.685mil|Location2.Y=3148.528mil|Absolute=True">Un-Routed Net Constraint: Net NetP21_2 Between Pad RsenseB-1(196.342mm,29.71mm) on Multi-Layer And Pad P21-2(229.235mm,79.121mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7197mil|Location2.X=8828.528mil|Location1.Y=1134.685mil|Location2.Y=3148.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7197mil|Location2.X=8828.528mil|Location1.Y=1134.685mil|Location2.Y=3148.528mil|Absolute=True">Un-Routed Net Constraint: Net NetP20_2 Between Pad RsenseA-1(184.404mm,29.71mm) on Multi-Layer And Pad P20-2(223.393mm,79.121mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=14501mil|Location2.X=14984mil|Location1.Y=2909.602mil|Location2.Y=3140.398mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=14501mil|Location2.X=14984mil|Location1.Y=2909.602mil|Location2.Y=3140.398mil|Absolute=True">Un-Routed Net Constraint: Net NetP9_5 Between Pad R4-2(369.062mm,78.585mm) on Multi-Layer And Pad R3-1(379.857mm,75.085mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=14926mil|Location2.X=15538.528mil|Location1.Y=2909.602mil|Location2.Y=3048.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=14926mil|Location2.X=15538.528mil|Location1.Y=2909.602mil|Location2.Y=3048.528mil|Absolute=True">Un-Routed Net Constraint: Net NetP9_5 Between Pad R3-1(379.857mm,75.085mm) on Multi-Layer And Pad P9-5(393.827mm,76.581mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=21715mil|Location2.X=22559.354mil|Location1.Y=2851.709mil|Location2.Y=3068mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=21715mil|Location2.X=22559.354mil|Location1.Y=2851.709mil|Location2.Y=3068mil|Absolute=True">Un-Routed Net Constraint: Net NetP1_1 Between Pad P1-1(552.45mm,76.327mm) on Multi-Layer And Pad S1-1(568.706mm,74.635mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=17327.5mil|Location2.X=17564mil|Location1.Y=2909.602mil|Location2.Y=3099mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=17327.5mil|Location2.X=17564mil|Location1.Y=2909.602mil|Location2.Y=3099mil|Absolute=True">Un-Routed Net Constraint: Net NetD2_1 Between Pad D2-1(440.944mm,77.47mm) on Multi-Layer And Pad R1-1(445.389mm,75.085mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=22748.5mil|Location2.X=23066.5mil|Location1.Y=2825mil|Location2.Y=3130.398mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=22748.5mil|Location2.X=23066.5mil|Location1.Y=2825mil|Location2.Y=3130.398mil|Absolute=True">Un-Routed Net Constraint: Net NetC1_1 Between Pad D1-2(578.866mm,78.839mm) on Multi-Layer And Pad IC1-1(584.581mm,72.644mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=19395mil|Location2.X=20215mil|Location1.Y=2787mil|Location2.Y=2913mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=19395mil|Location2.X=20215mil|Location1.Y=2787mil|Location2.Y=2913mil|Absolute=True">Un-Routed Net Constraint: Net NetC1_1 Between Pad C1-1(493.522mm,72.39mm) on Multi-Layer And Pad C2-1(512.572mm,72.39mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=20145mil|Location2.X=20812.74mil|Location1.Y=2787mil|Location2.Y=3150.339mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=20145mil|Location2.X=20812.74mil|Location1.Y=2787mil|Location2.Y=3150.339mil|Absolute=True">Un-Routed Net Constraint: Net NetC1_1 Between Pad C2-1(512.572mm,72.39mm) on Multi-Layer And Pad C3-2(527.942mm,78.867mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=20757.496mil|Location2.X=22831.5mil|Location1.Y=3059.661mil|Location2.Y=3150.339mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=20757.496mil|Location2.X=22831.5mil|Location1.Y=3059.661mil|Location2.Y=3150.339mil|Absolute=True">Un-Routed Net Constraint: Net NetC1_1 Between Pad C3-2(527.942mm,78.867mm) on Multi-Layer And Pad D1-2(578.866mm,78.839mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16131.417mil|Location2.X=16201.417mil|Location1.Y=2813.047mil|Location2.Y=3166.953mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16131.417mil|Location2.X=16201.417mil|Location1.Y=2813.047mil|Location2.Y=3166.953mil|Absolute=True">Un-Routed Net Constraint: Net MCLR Between Pad S2-3(410.627mm,72.696mm) on Multi-Layer And Pad S2-2(410.627mm,79.196mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=15752.496mil|Location2.X=16201.417mil|Location1.Y=3059.661mil|Location2.Y=3166.953mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=15752.496mil|Location2.X=16201.417mil|Location1.Y=3059.661mil|Location2.Y=3166.953mil|Absolute=True">Un-Routed Net Constraint: Net MCLR Between Pad C7-2(400.815mm,78.867mm) on Multi-Layer And Pad S2-2(410.627mm,79.196mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16131.417mil|Location2.X=16509mil|Location1.Y=2813.047mil|Location2.Y=3002.602mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16131.417mil|Location2.X=16509mil|Location1.Y=2813.047mil|Location2.Y=3002.602mil|Absolute=True">Un-Routed Net Constraint: Net MCLR Between Pad S2-3(410.627mm,72.696mm) on Multi-Layer And Pad R2-1(418.592mm,75.085mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13442mil|Location2.X=15807.74mil|Location1.Y=3031.5mil|Location2.Y=3150.339mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13442mil|Location2.X=15807.74mil|Location1.Y=3031.5mil|Location2.Y=3150.339mil|Absolute=True">Un-Routed Net Constraint: Net MCLR Between Pad IC2-1(343.027mm,77.851mm) on Multi-Layer And Pad C7-2(400.815mm,78.867mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11131.472mil|Location2.X=13568mil|Location1.Y=2581.472mil|Location2.Y=3098.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11131.472mil|Location2.X=13568mil|Location1.Y=2581.472mil|Location2.Y=3098.5mil|Absolute=True">Un-Routed Net Constraint: Net MCLR Between Pad P2-1(283.591mm,66.421mm) on Multi-Layer And Pad IC2-1(343.027mm,77.851mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=14042mil|Location2.X=16853.528mil|Location1.Y=1331.5mil|Location2.Y=3048.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=14042mil|Location2.X=16853.528mil|Location1.Y=1331.5mil|Location2.Y=3048.528mil|Absolute=True">Un-Routed Net Constraint: Net INT1 Between Pad IC2-23(358.267mm,34.671mm) on Multi-Layer And Pad P8-3(427.228mm,76.581mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13442mil|Location2.X=16683.528mil|Location1.Y=1431.5mil|Location2.Y=3048.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13442mil|Location2.X=16683.528mil|Location1.Y=1431.5mil|Location2.Y=3048.528mil|Absolute=True">Un-Routed Net Constraint: Net INT0 Between Pad IC2-17(343.027mm,37.211mm) on Multi-Layer And Pad P7-3(422.91mm,76.581mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10116mil|Location2.X=14168mil|Location1.Y=2525mil|Location2.Y=2598.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10116mil|Location2.X=14168mil|Location1.Y=2525mil|Location2.Y=2598.5mil|Absolute=True">Un-Routed Net Constraint: Net In4 Between Pad IC3-12(258.064mm,65.024mm) on Multi-Layer And Pad IC2-35(358.267mm,65.151mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10116mil|Location2.X=14168mil|Location1.Y=2625mil|Location2.Y=2698.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10116mil|Location2.X=14168mil|Location1.Y=2625mil|Location2.Y=2698.5mil|Absolute=True">Un-Routed Net Constraint: Net In3 Between Pad IC3-10(258.064mm,67.564mm) on Multi-Layer And Pad IC2-36(358.267mm,67.691mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9916mil|Location2.X=14168mil|Location1.Y=2731.5mil|Location2.Y=2845mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9916mil|Location2.X=14168mil|Location1.Y=2731.5mil|Location2.Y=2845mil|Absolute=True">Un-Routed Net Constraint: Net In2 Between Pad IC3-7(252.984mm,71.374mm) on Multi-Layer And Pad IC2-37(358.267mm,70.231mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9916mil|Location2.X=14168mil|Location1.Y=2831.5mil|Location2.Y=2945mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9916mil|Location2.X=14168mil|Location1.Y=2831.5mil|Location2.Y=2945mil|Absolute=True">Un-Routed Net Constraint: Net In1 Between Pad IC3-5(252.984mm,73.914mm) on Multi-Layer And Pad IC2-38(358.267mm,72.771mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=21326.472mil|Location2.X=21393.528mil|Location1.Y=2681.472mil|Location2.Y=2848.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=21326.472mil|Location2.X=21393.528mil|Location1.Y=2681.472mil|Location2.Y=2848.528mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad P6-2(542.544mm,68.961mm) on Multi-Layer And Pad P6-3(542.544mm,71.501mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=21326.472mil|Location2.X=21393.528mil|Location1.Y=2881.472mil|Location2.Y=3048.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=21326.472mil|Location2.X=21393.528mil|Location1.Y=2881.472mil|Location2.Y=3048.528mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad P6-4(542.544mm,74.041mm) on Multi-Layer And Pad P6-5(542.544mm,76.581mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=21326.472mil|Location2.X=21393.528mil|Location1.Y=2581.472mil|Location2.Y=2748.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=21326.472mil|Location2.X=21393.528mil|Location1.Y=2581.472mil|Location2.Y=2748.528mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad P6-1(542.544mm,66.421mm) on Multi-Layer And Pad P6-2(542.544mm,68.961mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=21326.472mil|Location2.X=21393.528mil|Location1.Y=2981.472mil|Location2.Y=3148.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=21326.472mil|Location2.X=21393.528mil|Location1.Y=2981.472mil|Location2.Y=3148.528mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad P6-5(542.544mm,76.581mm) on Multi-Layer And Pad P6-6(542.544mm,79.121mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16616.472mil|Location2.X=16853.528mil|Location1.Y=3081.472mil|Location2.Y=3148.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16616.472mil|Location2.X=16853.528mil|Location1.Y=3081.472mil|Location2.Y=3148.528mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad P7-4(422.91mm,79.121mm) on Multi-Layer And Pad P8-4(427.228mm,79.121mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16786.472mil|Location2.X=17012.504mil|Location1.Y=3059.661mil|Location2.Y=3150.339mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16786.472mil|Location2.X=17012.504mil|Location1.Y=3059.661mil|Location2.Y=3150.339mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad P8-4(427.228mm,79.121mm) on Multi-Layer And Pad C10-1(431.416mm,78.867mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8188.5mil|Location2.X=8446.5mil|Location1.Y=2939.602mil|Location2.Y=2992.602mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8188.5mil|Location2.X=8446.5mil|Location1.Y=2939.602mil|Location2.Y=2992.602mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad D8-1(209.042mm,75.339mm) on Multi-Layer And Pad D10-1(213.487mm,75.339mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8013.5mil|Location2.X=8271.5mil|Location1.Y=2939.602mil|Location2.Y=2992.602mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8013.5mil|Location2.X=8271.5mil|Location1.Y=2939.602mil|Location2.Y=2992.602mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad D7-1(204.597mm,75.339mm) on Multi-Layer And Pad D8-1(209.042mm,75.339mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=12226.472mil|Location2.X=12502.504mil|Location1.Y=3059.661mil|Location2.Y=3150.339mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=12226.472mil|Location2.X=12502.504mil|Location1.Y=3059.661mil|Location2.Y=3150.339mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad P13-6(311.404mm,79.121mm) on Multi-Layer And Pad C13-1(316.862mm,78.867mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8363.5mil|Location2.X=8671.5mil|Location1.Y=2939.602mil|Location2.Y=2992.602mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8363.5mil|Location2.X=8671.5mil|Location1.Y=2939.602mil|Location2.Y=2992.602mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad D10-1(213.487mm,75.339mm) on Multi-Layer And Pad D9-1(219.202mm,75.339mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=12001.472mil|Location2.X=12293.528mil|Location1.Y=3081.472mil|Location2.Y=3148.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=12001.472mil|Location2.X=12293.528mil|Location1.Y=3081.472mil|Location2.Y=3148.528mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad P12-6(305.689mm,79.121mm) on Multi-Layer And Pad P13-6(311.404mm,79.121mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=12702.26mil|Location2.X=13012.504mil|Location1.Y=3059.661mil|Location2.Y=3150.339mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=12702.26mil|Location2.X=13012.504mil|Location1.Y=3059.661mil|Location2.Y=3150.339mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C16-1(323.339mm,78.867mm) on Multi-Layer And Pad C12-1(329.816mm,78.867mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=20647.26mil|Location2.X=20957.504mil|Location1.Y=3059.661mil|Location2.Y=3150.339mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=20647.26mil|Location2.X=20957.504mil|Location1.Y=3059.661mil|Location2.Y=3150.339mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C3-1(525.142mm,78.867mm) on Multi-Layer And Pad C4-1(531.619mm,78.867mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=15642.26mil|Location2.X=15952.504mil|Location1.Y=3059.661mil|Location2.Y=3150.339mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=15642.26mil|Location2.X=15952.504mil|Location1.Y=3059.661mil|Location2.Y=3150.339mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C7-1(398.015mm,78.867mm) on Multi-Layer And Pad C11-1(404.492mm,78.867mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16308.583mil|Location2.X=16378.583mil|Location1.Y=2813.047mil|Location2.Y=3166.953mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16308.583mil|Location2.X=16378.583mil|Location1.Y=2813.047mil|Location2.Y=3166.953mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad S2-1(415.127mm,72.696mm) on Multi-Layer And Pad S2-4(415.127mm,79.196mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=15172mil|Location2.X=15538.528mil|Location1.Y=2781.472mil|Location2.Y=2900mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=15172mil|Location2.X=15538.528mil|Location1.Y=2781.472mil|Location2.Y=2900mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad P14-2(386.969mm,72.771mm) on Multi-Layer And Pad P9-3(393.827mm,71.501mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16957.26mil|Location2.X=17292.5mil|Location1.Y=3001mil|Location2.Y=3150.339mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16957.26mil|Location2.X=17292.5mil|Location1.Y=3001mil|Location2.Y=3150.339mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C10-1(431.416mm,78.867mm) on Multi-Layer And Pad D2-2(438.404mm,77.47mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=12957.26mil|Location2.X=13372.74mil|Location1.Y=3059.661mil|Location2.Y=3150.339mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=12957.26mil|Location2.X=13372.74mil|Location1.Y=3059.661mil|Location2.Y=3150.339mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C12-1(329.816mm,78.867mm) on Multi-Layer And Pad C9-2(338.966mm,78.867mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=14501mil|Location2.X=14832.74mil|Location1.Y=2909.602mil|Location2.Y=3150.339mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=14501mil|Location2.X=14832.74mil|Location1.Y=2909.602mil|Location2.Y=3150.339mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad R4-1(369.062mm,75.085mm) on Multi-Layer And Pad C8-2(376.05mm,78.867mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=14042mil|Location2.X=14559mil|Location1.Y=2909.602mil|Location2.Y=3002.602mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=14042mil|Location2.X=14559mil|Location1.Y=2909.602mil|Location2.Y=3002.602mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad IC2-39(358.267mm,75.311mm) on Multi-Layer And Pad R4-1(369.062mm,75.085mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7197mil|Location2.X=7793mil|Location1.Y=3095.315mil|Location2.Y=3165.315mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7197mil|Location2.X=7793mil|Location1.Y=3095.315mil|Location2.Y=3165.315mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad RsenseA-2(184.404mm,79.51mm) on Multi-Layer And Pad RsenseB-2(196.342mm,79.51mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10877.26mil|Location2.X=11198.528mil|Location1.Y=2781.472mil|Location2.Y=3150.339mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10877.26mil|Location2.X=11198.528mil|Location1.Y=2781.472mil|Location2.Y=3150.339mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C15-1(276.984mm,78.867mm) on Multi-Layer And Pad P2-3(283.591mm,71.501mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=20302.48mil|Location2.X=20702.504mil|Location1.Y=2787mil|Location2.Y=3150.339mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=20302.48mil|Location2.X=20702.504mil|Location1.Y=2787mil|Location2.Y=3150.339mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C2-2(516.572mm,72.39mm) on Multi-Layer And Pad C3-1(525.142mm,78.867mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=21326.472mil|Location2.X=21985mil|Location1.Y=2942mil|Location2.Y=3068mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=21326.472mil|Location2.X=21985mil|Location1.Y=2942mil|Location2.Y=3068mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad P6-5(542.544mm,76.581mm) on Multi-Layer And Pad P1-2(557.53mm,76.327mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=18807.48mil|Location2.X=19622.48mil|Location1.Y=2787mil|Location2.Y=2913mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=18807.48mil|Location2.X=19622.48mil|Location1.Y=2787mil|Location2.Y=2913mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C6-2(478.599mm,72.39mm) on Multi-Layer And Pad C1-2(497.522mm,72.39mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=18057.48mil|Location2.X=18877.48mil|Location1.Y=2787mil|Location2.Y=2913mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=18057.48mil|Location2.X=18877.48mil|Location1.Y=2787mil|Location2.Y=2913mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C5-2(459.549mm,72.39mm) on Multi-Layer And Pad C6-2(478.599mm,72.39mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13442mil|Location2.X=13568mil|Location1.Y=1131.5mil|Location2.Y=1998.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13442mil|Location2.X=13568mil|Location1.Y=1131.5mil|Location2.Y=1998.5mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad IC2-20(343.027mm,29.591mm) on Multi-Layer And Pad IC2-12(343.027mm,49.911mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13442mil|Location2.X=14168mil|Location1.Y=1931.5mil|Location2.Y=2198.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13442mil|Location2.X=14168mil|Location1.Y=1931.5mil|Location2.Y=2198.5mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad IC2-12(343.027mm,49.911mm) on Multi-Layer And Pad IC2-31(358.267mm,54.991mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9657.26mil|Location2.X=10204mil|Location1.Y=2725mil|Location2.Y=3150.339mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9657.26mil|Location2.X=10204mil|Location1.Y=2725mil|Location2.Y=3150.339mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C14-1(245.996mm,78.867mm) on Multi-Layer And Pad IC3-8(258.064mm,70.104mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=21915mil|Location2.X=23066.5mil|Location1.Y=2925.394mil|Location2.Y=3068mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=21915mil|Location2.X=23066.5mil|Location1.Y=2925.394mil|Location2.Y=3068mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad P1-2(557.53mm,76.327mm) on Multi-Layer And Pad IC1-2(584.581mm,75.194mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=21326.472mil|Location2.X=21393.528mil|Location1.Y=2781.472mil|Location2.Y=2948.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=21326.472mil|Location2.X=21393.528mil|Location1.Y=2781.472mil|Location2.Y=2948.528mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad P6-3(542.544mm,71.501mm) on Multi-Layer And Pad P6-4(542.544mm,74.041mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=12447.26mil|Location2.X=12757.504mil|Location1.Y=3059.661mil|Location2.Y=3150.339mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=12447.26mil|Location2.X=12757.504mil|Location1.Y=3059.661mil|Location2.Y=3150.339mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C13-1(316.862mm,78.867mm) on Multi-Layer And Pad C16-1(323.339mm,78.867mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16308.583mil|Location2.X=16683.528mil|Location1.Y=3068.953mil|Location2.Y=3166.953mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16308.583mil|Location2.X=16683.528mil|Location1.Y=3068.953mil|Location2.Y=3166.953mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad S2-4(415.127mm,79.196mm) on Multi-Layer And Pad P7-4(422.91mm,79.121mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=15897.26mil|Location2.X=16378.583mil|Location1.Y=3059.661mil|Location2.Y=3166.953mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=15897.26mil|Location2.X=16378.583mil|Location1.Y=3059.661mil|Location2.Y=3166.953mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C11-1(404.492mm,78.867mm) on Multi-Layer And Pad S2-4(415.127mm,79.196mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=20902.26mil|Location2.X=21393.528mil|Location1.Y=3059.661mil|Location2.Y=3150.339mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=20902.26mil|Location2.X=21393.528mil|Location1.Y=3059.661mil|Location2.Y=3150.339mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C4-1(531.619mm,78.867mm) on Multi-Layer And Pad P6-6(542.544mm,79.121mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=15471.472mil|Location2.X=15697.504mil|Location1.Y=2781.472mil|Location2.Y=3150.339mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=15471.472mil|Location2.X=15697.504mil|Location1.Y=2781.472mil|Location2.Y=3150.339mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad P9-3(393.827mm,71.501mm) on Multi-Layer And Pad C7-1(398.015mm,78.867mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7667mil|Location2.X=8096.5mil|Location1.Y=2939.602mil|Location2.Y=3165.315mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=7667mil|Location2.X=8096.5mil|Location1.Y=2939.602mil|Location2.Y=3165.315mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad RsenseB-2(196.342mm,79.51mm) on Multi-Layer And Pad D7-1(204.597mm,75.339mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=14777.496mil|Location2.X=15298mil|Location1.Y=2830mil|Location2.Y=3150.339mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=14777.496mil|Location2.X=15298mil|Location1.Y=2830mil|Location2.Y=3150.339mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C8-2(376.05mm,78.867mm) on Multi-Layer And Pad P14-2(386.969mm,72.771mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=19552.48mil|Location2.X=20372.48mil|Location1.Y=2787mil|Location2.Y=2913mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=19552.48mil|Location2.X=20372.48mil|Location1.Y=2787mil|Location2.Y=2913mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C1-2(497.522mm,72.39mm) on Multi-Layer And Pad C2-2(516.572mm,72.39mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=14042mil|Location2.X=14168mil|Location1.Y=2131.5mil|Location2.Y=2998.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=14042mil|Location2.X=14168mil|Location1.Y=2131.5mil|Location2.Y=2998.5mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad IC2-31(358.267mm,54.991mm) on Multi-Layer And Pad IC2-39(358.267mm,75.311mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10116mil|Location2.X=11198.528mil|Location1.Y=2725mil|Location2.Y=2848.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10116mil|Location2.X=11198.528mil|Location1.Y=2725mil|Location2.Y=2848.528mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad IC3-8(258.064mm,70.104mm) on Multi-Layer And Pad P2-3(283.591mm,71.501mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13317.496mil|Location2.X=14168mil|Location1.Y=2931.5mil|Location2.Y=3150.339mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13317.496mil|Location2.X=14168mil|Location1.Y=2931.5mil|Location2.Y=3150.339mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C9-2(338.966mm,78.867mm) on Multi-Layer And Pad IC2-39(358.267mm,75.311mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=17227.5mil|Location2.X=18127.48mil|Location1.Y=2787mil|Location2.Y=3099mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=17227.5mil|Location2.X=18127.48mil|Location1.Y=2787mil|Location2.Y=3099mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad D2-2(438.404mm,77.47mm) on Multi-Layer And Pad C5-2(459.549mm,72.39mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10877.26mil|Location2.X=12068.528mil|Location1.Y=3059.661mil|Location2.Y=3150.339mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10877.26mil|Location2.X=12068.528mil|Location1.Y=3059.661mil|Location2.Y=3150.339mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C15-1(276.984mm,78.867mm) on Multi-Layer And Pad P12-6(305.689mm,79.121mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8588.5mil|Location2.X=9712.504mil|Location1.Y=2939.602mil|Location2.Y=3150.339mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8588.5mil|Location2.X=9712.504mil|Location1.Y=2939.602mil|Location2.Y=3150.339mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad D9-1(219.202mm,75.339mm) on Multi-Layer And Pad C14-1(245.996mm,78.867mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9916mil|Location2.X=14168mil|Location1.Y=2331.5mil|Location2.Y=2645mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9916mil|Location2.X=14168mil|Location1.Y=2331.5mil|Location2.Y=2645mil|Absolute=True">Un-Routed Net Constraint: Net EnB Between Pad IC3-11(252.984mm,66.294mm) on Multi-Layer And Pad IC2-33(358.267mm,60.071mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10116mil|Location2.X=14168mil|Location1.Y=2431.5mil|Location2.Y=2895mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10116mil|Location2.X=14168mil|Location1.Y=2431.5mil|Location2.Y=2895mil|Absolute=True">Un-Routed Net Constraint: Net EnA Between Pad IC3-6(258.064mm,72.644mm) on Multi-Layer And Pad IC2-34(358.267mm,62.611mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=21156.472mil|Location2.X=21223.528mil|Location1.Y=2681.472mil|Location2.Y=2848.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=21156.472mil|Location2.X=21223.528mil|Location1.Y=2681.472mil|Location2.Y=2848.528mil|Absolute=True">Un-Routed Net Constraint: Net 5V Between Pad P5-2(538.226mm,68.961mm) on Multi-Layer And Pad P5-3(538.226mm,71.501mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=21156.472mil|Location2.X=21223.528mil|Location1.Y=2581.472mil|Location2.Y=2748.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=21156.472mil|Location2.X=21223.528mil|Location1.Y=2581.472mil|Location2.Y=2748.528mil|Absolute=True">Un-Routed Net Constraint: Net 5V Between Pad P5-1(538.226mm,66.421mm) on Multi-Layer And Pad P5-2(538.226mm,68.961mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=21156.472mil|Location2.X=21223.528mil|Location1.Y=2781.472mil|Location2.Y=2948.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=21156.472mil|Location2.X=21223.528mil|Location1.Y=2781.472mil|Location2.Y=2948.528mil|Absolute=True">Un-Routed Net Constraint: Net 5V Between Pad P5-3(538.226mm,71.501mm) on Multi-Layer And Pad P5-4(538.226mm,74.041mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=21156.472mil|Location2.X=21223.528mil|Location1.Y=2981.472mil|Location2.Y=3148.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=21156.472mil|Location2.X=21223.528mil|Location1.Y=2981.472mil|Location2.Y=3148.528mil|Absolute=True">Un-Routed Net Constraint: Net 5V Between Pad P5-5(538.226mm,76.581mm) on Multi-Layer And Pad P5-6(538.226mm,79.121mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=21012.496mil|Location2.X=21223.528mil|Location1.Y=3059.661mil|Location2.Y=3150.339mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=21012.496mil|Location2.X=21223.528mil|Location1.Y=3059.661mil|Location2.Y=3150.339mil|Absolute=True">Un-Routed Net Constraint: Net 5V Between Pad C4-2(534.419mm,78.867mm) on Multi-Layer And Pad P5-6(538.226mm,79.121mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16616.472mil|Location2.X=16853.528mil|Location1.Y=2781.472mil|Location2.Y=2848.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16616.472mil|Location2.X=16853.528mil|Location1.Y=2781.472mil|Location2.Y=2848.528mil|Absolute=True">Un-Routed Net Constraint: Net 5V Between Pad P7-1(422.91mm,71.501mm) on Multi-Layer And Pad P8-1(427.228mm,71.501mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=12001.472mil|Location2.X=12293.528mil|Location1.Y=2881.472mil|Location2.Y=2948.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=12001.472mil|Location2.X=12293.528mil|Location1.Y=2881.472mil|Location2.Y=2948.528mil|Absolute=True">Un-Routed Net Constraint: Net 5V Between Pad P12-4(305.689mm,74.041mm) on Multi-Layer And Pad P13-4(311.404mm,74.041mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=12557.496mil|Location2.X=12867.74mil|Location1.Y=3059.661mil|Location2.Y=3150.339mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=12557.496mil|Location2.X=12867.74mil|Location1.Y=3059.661mil|Location2.Y=3150.339mil|Absolute=True">Un-Routed Net Constraint: Net 5V Between Pad C13-2(319.662mm,78.867mm) on Multi-Layer And Pad C16-2(326.139mm,78.867mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=15172mil|Location2.X=15538.528mil|Location1.Y=2630mil|Location2.Y=2748.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=15172mil|Location2.X=15538.528mil|Location1.Y=2630mil|Location2.Y=2748.528mil|Absolute=True">Un-Routed Net Constraint: Net 5V Between Pad P14-1(386.969mm,67.691mm) on Multi-Layer And Pad P9-2(393.827mm,68.961mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16451mil|Location2.X=16683.528mil|Location1.Y=2781.472mil|Location2.Y=3140.398mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16451mil|Location2.X=16683.528mil|Location1.Y=2781.472mil|Location2.Y=3140.398mil|Absolute=True">Un-Routed Net Constraint: Net 5V Between Pad R2-2(418.592mm,78.585mm) on Multi-Layer And Pad P7-1(422.91mm,71.501mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=17067.496mil|Location2.X=17564mil|Location1.Y=3047.398mil|Location2.Y=3150.339mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=17067.496mil|Location2.X=17564mil|Location1.Y=3047.398mil|Location2.Y=3150.339mil|Absolute=True">Un-Routed Net Constraint: Net 5V Between Pad C10-2(434.216mm,78.867mm) on Multi-Layer And Pad R1-2(445.389mm,78.585mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16007.496mil|Location2.X=16509mil|Location1.Y=3047.398mil|Location2.Y=3150.339mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16007.496mil|Location2.X=16509mil|Location1.Y=3047.398mil|Location2.Y=3150.339mil|Absolute=True">Un-Routed Net Constraint: Net 5V Between Pad C11-2(407.292mm,78.867mm) on Multi-Layer And Pad R2-2(418.592mm,78.585mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9767.496mil|Location2.X=10004mil|Location1.Y=2675mil|Location2.Y=3150.339mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9767.496mil|Location2.X=10004mil|Location1.Y=2675mil|Location2.Y=3150.339mil|Absolute=True">Un-Routed Net Constraint: Net 5V Between Pad C14-2(248.796mm,78.867mm) on Multi-Layer And Pad IC3-9(252.984mm,68.834mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=17506mil|Location2.X=17970mil|Location1.Y=2787mil|Location2.Y=3140.398mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=17506mil|Location2.X=17970mil|Location1.Y=2787mil|Location2.Y=3140.398mil|Absolute=True">Un-Routed Net Constraint: Net 5V Between Pad R1-2(445.389mm,78.585mm) on Multi-Layer And Pad C5-1(455.549mm,72.39mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=17900mil|Location2.X=18720mil|Location1.Y=2787mil|Location2.Y=2913mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=17900mil|Location2.X=18720mil|Location1.Y=2787mil|Location2.Y=2913mil|Absolute=True">Un-Routed Net Constraint: Net 5V Between Pad C5-1(455.549mm,72.39mm) on Multi-Layer And Pad C6-1(474.599mm,72.39mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=14042mil|Location2.X=14168mil|Location1.Y=2231.5mil|Location2.Y=3098.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=14042mil|Location2.X=14168mil|Location1.Y=2231.5mil|Location2.Y=3098.5mil|Absolute=True">Un-Routed Net Constraint: Net 5V Between Pad IC2-32(358.267mm,57.531mm) on Multi-Layer And Pad IC2-40(358.267mm,77.851mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13442mil|Location2.X=14168mil|Location1.Y=2031.5mil|Location2.Y=2298.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13442mil|Location2.X=14168mil|Location1.Y=2031.5mil|Location2.Y=2298.5mil|Absolute=True">Un-Routed Net Constraint: Net 5V Between Pad IC2-11(343.027mm,52.451mm) on Multi-Layer And Pad IC2-32(358.267mm,57.531mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11131.472mil|Location2.X=12068.528mil|Location1.Y=2681.472mil|Location2.Y=2948.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11131.472mil|Location2.X=12068.528mil|Location1.Y=2681.472mil|Location2.Y=2948.528mil|Absolute=True">Un-Routed Net Constraint: Net 5V Between Pad P2-2(283.591mm,68.961mm) on Multi-Layer And Pad P12-4(305.689mm,74.041mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=14042mil|Location2.X=14168mil|Location1.Y=1131.5mil|Location2.Y=2298.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=14042mil|Location2.X=14168mil|Location1.Y=1131.5mil|Location2.Y=2298.5mil|Absolute=True">Un-Routed Net Constraint: Net 5V Between Pad IC2-21(358.267mm,29.591mm) on Multi-Layer And Pad IC2-32(358.267mm,57.531mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=21156.472mil|Location2.X=23066.5mil|Location1.Y=2981.472mil|Location2.Y=3095.787mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=21156.472mil|Location2.X=23066.5mil|Location1.Y=2981.472mil|Location2.Y=3095.787mil|Absolute=True">Un-Routed Net Constraint: Net 5V Between Pad P5-5(538.226mm,76.581mm) on Multi-Layer And Pad IC1-3(584.581mm,77.744mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=21156.472mil|Location2.X=21223.528mil|Location1.Y=2881.472mil|Location2.Y=3048.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=21156.472mil|Location2.X=21223.528mil|Location1.Y=2881.472mil|Location2.Y=3048.528mil|Absolute=True">Un-Routed Net Constraint: Net 5V Between Pad P5-4(538.226mm,74.041mm) on Multi-Layer And Pad P5-5(538.226mm,76.581mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=12226.472mil|Location2.X=12612.74mil|Location1.Y=2881.472mil|Location2.Y=3150.339mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=12226.472mil|Location2.X=12612.74mil|Location1.Y=2881.472mil|Location2.Y=3150.339mil|Absolute=True">Un-Routed Net Constraint: Net 5V Between Pad P13-4(311.404mm,74.041mm) on Multi-Layer And Pad C13-2(319.662mm,78.867mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16786.472mil|Location2.X=17122.74mil|Location1.Y=2781.472mil|Location2.Y=3150.339mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=16786.472mil|Location2.X=17122.74mil|Location1.Y=2781.472mil|Location2.Y=3150.339mil|Absolute=True">Un-Routed Net Constraint: Net 5V Between Pad P8-1(427.228mm,71.501mm) on Multi-Layer And Pad C10-2(434.216mm,78.867mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=15471.472mil|Location2.X=16062.74mil|Location1.Y=2681.472mil|Location2.Y=3150.339mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=15471.472mil|Location2.X=16062.74mil|Location1.Y=2681.472mil|Location2.Y=3150.339mil|Absolute=True">Un-Routed Net Constraint: Net 5V Between Pad P9-2(393.827mm,68.961mm) on Multi-Layer And Pad C11-2(407.292mm,78.867mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9916mil|Location2.X=11198.528mil|Location1.Y=2675mil|Location2.Y=2748.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=9916mil|Location2.X=11198.528mil|Location1.Y=2675mil|Location2.Y=2748.528mil|Absolute=True">Un-Routed Net Constraint: Net 5V Between Pad IC3-9(252.984mm,68.834mm) on Multi-Layer And Pad P2-2(283.591mm,68.961mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=12812.496mil|Location2.X=14168mil|Location1.Y=3031.5mil|Location2.Y=3150.339mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=12812.496mil|Location2.X=14168mil|Location1.Y=3031.5mil|Location2.Y=3150.339mil|Absolute=True">Un-Routed Net Constraint: Net 5V Between Pad C16-2(326.139mm,78.867mm) on Multi-Layer And Pad IC2-40(358.267mm,77.851mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=14042mil|Location2.X=15298mil|Location1.Y=2630mil|Location2.Y=3098.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=14042mil|Location2.X=15298mil|Location1.Y=2630mil|Location2.Y=3098.5mil|Absolute=True">Un-Routed Net Constraint: Net 5V Between Pad IC2-40(358.267mm,77.851mm) on Multi-Layer And Pad P14-1(386.969mm,67.691mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=18650mil|Location2.X=21223.528mil|Location1.Y=2781.472mil|Location2.Y=2913mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=18650mil|Location2.X=21223.528mil|Location1.Y=2781.472mil|Location2.Y=2913mil|Absolute=True">Un-Routed Net Constraint: Net 5V Between Pad C6-1(474.599mm,72.39mm) on Multi-Layer And Pad P5-3(538.226mm,71.501mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="ID5MUWZP1SXAWHHTZV2R0GEDITCIHCADPCITTYG4F4V0Z1BCZI3KFM"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk To Solder Mask (Clearance=0.254mm) (IsPad),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13509.375mil|Location2.X=13520.625mil|Location1.Y=1125.611mil|Location2.Y=1136.861mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=13509.375mil|Location2.X=13520.625mil|Location1.Y=1125.611mil|Location2.Y=1136.861mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.215mm &lt; 0.254mm) Between Track (343.281mm,27.102mm)(343.281mm,28.55mm) on Top Overlay And Pad IC2-20(343.027mm,29.591mm) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0.215mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=14089.375mil|Location2.X=14100.625mil|Location1.Y=1125.611mil|Location2.Y=1136.861mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=14089.375mil|Location2.X=14100.625mil|Location1.Y=1125.611mil|Location2.Y=1136.861mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.215mm &lt; 0.254mm) Between Track (358.013mm,27.102mm)(358.013mm,28.55mm) on Top Overlay And Pad IC2-21(358.267mm,29.591mm) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0.215mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=14089.375mil|Location2.X=14100.625mil|Location1.Y=3093.139mil|Location2.Y=3104.389mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\VII SEMESTAR\Primenjena elektronika\Automobil-koji-izbegava-prepreke\Projektovanje plocice u Altiumu\novo.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=14089.375mil|Location2.X=14100.625mil|Location1.Y=3093.139mil|Location2.Y=3104.389mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.215mm &lt; 0.254mm) Between Track (358.013mm,78.892mm)(358.013mm,80.34mm) on Top Overlay And Pad IC2-40(358.267mm,77.851mm) on Multi-Layer [Top Overlay] to [Top Solder] clearance [0.215mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>
