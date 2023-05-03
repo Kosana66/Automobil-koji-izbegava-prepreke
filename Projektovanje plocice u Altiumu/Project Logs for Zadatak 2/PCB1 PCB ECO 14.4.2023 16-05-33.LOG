@@ -1,0 +1,10 @@
+Removed Pin From Net: NetName=NetP9_5 Pin=P9-1
+Removed Pin From Net: NetName=5V Pin=P9-2
+Removed Pin From Net: NetName=GND Pin=P9-3
+Removed Pin From Net: NetName=U2RX Pin=P9-4
+Added Pin To Net: NetName=5V Pin=P9-1
+Added Pin To Net: NetName=GND Pin=P9-2
+Added Pin To Net: NetName=U2RX Pin=P9-3
+Added Pin To Net: NetName=NetP9_5 Pin=P9-4
+Change Net Name : Old Net Name=NetP9_5 New Net Name=NetP9_4
+Added Room: Name=schematic

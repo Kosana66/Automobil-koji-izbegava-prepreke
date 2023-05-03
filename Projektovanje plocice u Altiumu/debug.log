@@ -39,3 +39,26 @@
 [0405/180842:INFO:CONSOLE(0)] "The source list for Content Security Policy directive 'script-src' contains an invalid source: ''report-sample''. It will be ignored.", source: https://www.altium.com/ad-start/ (0)
 [0405/180842:INFO:CONSOLE(0)] "Unrecognized Content-Security-Policy directive 'worker-src'.
 ", source: https://www.altium.com/ad-start/ (0)
+[0414/135155:INFO:CONSOLE(0)] "Unrecognized Content-Security-Policy directive 'prefetch-src'.
+", source: https://www.altium.com/ad-start/ (0)
+[0414/135155:INFO:CONSOLE(0)] "The source list for Content Security Policy directive 'script-src' contains an invalid source: ''report-sample''. It will be ignored.", source: https://www.altium.com/ad-start/ (0)
+[0414/135155:INFO:CONSOLE(0)] "Unrecognized Content-Security-Policy directive 'worker-src'.
+", source: https://www.altium.com/ad-start/ (0)
+[0417/161809:WARNING:dns_config_service_win.cc(665)] Failed to read DnsConfig.
+[0417/161810:WARNING:dns_config_service_win.cc(665)] Failed to read DnsConfig.
+[0417/224901:WARNING:dns_config_service_win.cc(665)] Failed to read DnsConfig.
+[0417/224907:WARNING:dns_config_service_win.cc(665)] Failed to read DnsConfig.
+[0417/224912:WARNING:dns_config_service_win.cc(665)] Failed to read DnsConfig.
+[0417/224917:WARNING:dns_config_service_win.cc(665)] Failed to read DnsConfig.
+[0417/224922:WARNING:dns_config_service_win.cc(665)] Failed to read DnsConfig.
+[0417/224927:WARNING:dns_config_service_win.cc(665)] Failed to read DnsConfig.
+[0417/224932:WARNING:dns_config_service_win.cc(665)] Failed to read DnsConfig.
+[0417/224937:WARNING:dns_config_service_win.cc(665)] Failed to read DnsConfig.
+[0417/224942:WARNING:dns_config_service_win.cc(665)] Failed to read DnsConfig.
+[0417/224947:WARNING:dns_config_service_win.cc(665)] Failed to read DnsConfig.
+[0417/224952:WARNING:dns_config_service_win.cc(665)] Failed to read DnsConfig.
+[0417/224957:WARNING:dns_config_service_win.cc(665)] Failed to read DnsConfig.
+[0417/225002:WARNING:dns_config_service_win.cc(665)] Failed to read DnsConfig.
+[0417/225007:WARNING:dns_config_service_win.cc(665)] Failed to read DnsConfig.
+[0417/225012:WARNING:dns_config_service_win.cc(665)] Failed to read DnsConfig.
+[0417/225017:WARNING:dns_config_service_win.cc(665)] Failed to read DnsConfig.
