@@ -20,6 +20,12 @@ void Init_T2(void);
 /// Function for initializing Timer3
 void Init_T3(void);
 
+/// Function for initializing Timer4
+void Init_T4(void);
+
+/// Function for initializing Timer5
+void Init_T5(void);
+
 #endif	/* TIMER_H */
 
 

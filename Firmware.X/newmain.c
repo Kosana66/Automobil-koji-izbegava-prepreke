@@ -35,7 +35,7 @@ _FGS(CODE_PROT_OFF);
 /// Variables
 /*************************************************************/
 unsigned int sharp_value, RsenseA_value, RsenseB_value;
-int time_counter1, time_counter2, time_counter3;
+int us_counter, ms_counter;
 unsigned char tempRX1_Debug, tempRX2_Bluetooth;
 
 
@@ -47,7 +47,7 @@ unsigned char tempRX1_Debug, tempRX2_Bluetooth;
 void __attribute__ ((__interrupt__)) _T1Interrupt(void) 
 {
     TMR1 = 0;
-    time_counter1++;
+    ms_counter++;
     IFS0bits.T1IF = 0;     
 }
 
@@ -55,7 +55,7 @@ void __attribute__ ((__interrupt__)) _T1Interrupt(void)
 void __attribute__ ((__interrupt__)) _T2Interrupt(void) 
 {
     TMR2 = 0;
-    time_counter2++;
+    us_counter++;
     IFS0bits.T2IF = 0;     
 }
 
@@ -63,10 +63,22 @@ void __attribute__ ((__interrupt__)) _T2Interrupt(void)
 void __attribute__ ((__interrupt__)) _T3Interrupt(void) 
 {
     TMR3 = 0;
-    time_counter3++;
     IFS0bits.T3IF = 0;     
 }
 
+/// Interrupt Service Routine(ISR) for Timer4
+void __attribute__ ((__interrupt__)) _T4Interrupt(void) 
+{
+    TMR4 = 0;
+    IFS1bits.T4IF = 0;     
+}
+
+/// Interrupt Service Routine(ISR) for Timer5
+void __attribute__ ((__interrupt__)) _T5Interrupt(void) 
+{
+    TMR5 = 0;
+    IFS1bits.T4IF = 0;     
+}
 /// Interrupt Service Routine(ISR) for AD conversion
 void __attribute__((__interrupt__)) _ADCInterrupt(void) 
 {
@@ -83,6 +95,7 @@ void __attribute__((__interrupt__)) _U1RXInterrupt(void)
 {
     IFS0bits.U1RXIF = 0;
     tempRX1_Debug=U1RXREG;
+    WriteCharUART1(tempRX1_Debug);
 } 
 
 /// Interrupt Service Routine(ISR) for UART2
@@ -90,18 +103,17 @@ void __attribute__((__interrupt__)) _U2RXInterrupt(void)
 {
     IFS1bits.U2RXIF = 0;
     tempRX2_Bluetooth=U2RXREG;
+    WriteCharUART2(tempRX2_Bluetooth);
 } 
 
 /*************************************************************/
 // FUNKCIJE ZA TAJMERE
 /*************************************************************/
 
-/// Function for delay 
-void Delay1 (int vreme);
-/// Function for delay
-void Delay2 (int vreme);
-/// Function for delay
-void Delay3 (int vreme);
+/// Function for delay in miliseconds 
+void DelayMs (int vreme);
+/// Function for delay in microseconds 
+void DelayUs (int vreme);
 
 /* 
  * @brief - Function of main program
@@ -116,6 +128,8 @@ int main(int argc, char** argv) {
     Init_T1();
     Init_T2();
     Init_T3();
+    Init_T4();
+    Init_T5();
     InitUART1();
     InitUART2();
         
@@ -125,7 +139,6 @@ int main(int argc, char** argv) {
     while(1)
     {
         
-                
         
             
     }
@@ -137,41 +150,29 @@ int main(int argc, char** argv) {
 /*************************************************************/
 
 /* 
- * @brief - Function for delay
+ * @brief - Function for delay in miliseconds
  * @param vreme - Duration of pause 
  * @return None
  */
-void Delay1 (int vreme)
+void DelayMs (int vreme)
 {
-    time_counter1 = 0;
+    ms_counter = 0;
     T1CONbits.TON = 1;
-    while(time_counter1 < vreme);
+    while(ms_counter < vreme);
     T1CONbits.TON = 0;
 }
 
 /* 
- * @brief - Function for delay
+ * @brief - Function for delay in microseconds
  * @param vreme - Duration of pause 
  * @return None
  */
-void Delay2 (int vreme)
+void DelayUs (int vreme)
 {
-    time_counter2 = 0;
+    us_counter = 0;
     T2CONbits.TON = 1;
-    while(time_counter2 < vreme);
+    while(us_counter < vreme);
     T2CONbits.TON = 0;
 }
 
-/* 
- * @brief - Function for delay
- * @param vreme - Duration of pause 
- * @return None
- */
-void Delay3 (int vreme)
-{
-    time_counter3 = 0;
-    T3CONbits.TON = 1;
-    while(time_counter3 < vreme);
-    T3CONbits.TON = 0;
-}
 	
