@@ -33,7 +33,7 @@ void ConfigureADCPins(void)
  * @param None
  * @return None
  */
-void ADCinit(void)
+void InitADC(void)
 {
     /// 0 = AD conversion continue module operation in Idle mode
     ADCON1bits.ADSIDL=0; 

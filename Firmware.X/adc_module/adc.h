@@ -15,6 +15,6 @@
 void ConfigureADCPins(void);
 
 /// Function for initialization AD conversion
-void ADCinit(void);
+void InitADC(void);
 
 #endif	/* ADC_H */

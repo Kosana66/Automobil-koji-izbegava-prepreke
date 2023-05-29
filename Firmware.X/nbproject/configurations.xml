@@ -7,6 +7,8 @@
       <itemPath>adc_module/adc.h</itemPath>
       <itemPath>timer_module/timer.h</itemPath>
       <itemPath>uart_module/uart.h</itemPath>
+      <itemPath>pwm_module/pwm.h</itemPath>
+      <itemPath>digital_sensors/HCSR.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -19,6 +21,8 @@
       <itemPath>adc_module/adc.c</itemPath>
       <itemPath>timer_module/timer.c</itemPath>
       <itemPath>uart_module/uart.c</itemPath>
+      <itemPath>pwm_module/pwm.c</itemPath>
+      <itemPath>digital_sensors/HCSR.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -28,6 +32,7 @@
   </logicalFolder>
   <sourceRootList>
     <Elem>.</Elem>
+    <Elem>../../../..</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>

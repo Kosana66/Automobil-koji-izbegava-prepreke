@@ -50,8 +50,10 @@ void WriteStringUART1(register const char *str)
     while((*str)!=0)
     {
         WriteCharUART1(*str);
-        if(*str == 13) WriteCharUART1(10); /// 10 = new line
-        if(*str == 10) WriteCharUART1(13); /// 13 = carriage return
+        if(*str == 10)
+            WriteCharUART1(13);
+        if(*str == 13)
+            WriteCharUART1(10);
         str++;
     }
 }
@@ -114,10 +116,7 @@ void WriteStringUART2(register const char *str)
 {
     while((*str)!=0)
     {
-        WriteCharUART2(*str);
-        if(*str == 13) WriteCharUART2(10); /// 10 = new line
-        if(*str == 10) WriteCharUART2(13); /// 13 = carriage return
-        str++;
+        WriteCharUART2(*str++);
     }
 }
 

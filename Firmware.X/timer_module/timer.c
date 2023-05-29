@@ -10,12 +10,6 @@
 /// Header file for AD conversion
 #include "timer.h"
 
-#define TMR1_period 10000   // 1/Fosc = 1/10000000 = 0.1us , 0.1us * 10000 = 1ms
-#define TMR2_period 10  // 1/Fosc = 1/10000000 = 0.1us , 0.1us * 10 = 1us
-#define TMR3_period 5000
-#define TMR4_period 50000
-#define TMR5_period 50000
-
 /* 
  * @brief - Function for initializing Timer1
  * @param None
@@ -56,6 +50,7 @@ void Init_T3(void)
     TMR3 = 0;
     PR3 = TMR3_period;
     T3CONbits.TCS = 0; // 0 = Internal clock (FOSC/4)
+    T3CONbits.TCKPS = 0b00; // set prescaler to 1:1
     IFS0bits.T3IF = 0; // clear timer3 interrupt flag
     IEC0bits.T3IE = 1; // enable timer3 interrupt
     T3CONbits.TON = 0; // Timer3 off 

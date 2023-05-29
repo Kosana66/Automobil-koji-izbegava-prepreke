@@ -51,17 +51,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=newmain.c adc_module/adc.c timer_module/timer.c uart_module/uart.c
+SOURCEFILES_QUOTED_IF_SPACED=adc_module/adc.h timer_module/timer.h uart_module/uart.h newmain.c adc_module/adc.c timer_module/timer.c uart_module/uart.c pwm_module/pwm.h pwm_module/pwm.c digital_sensors/HCSR.h digital_sensors/HCSR.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/newmain.o ${OBJECTDIR}/adc_module/adc.o ${OBJECTDIR}/timer_module/timer.o ${OBJECTDIR}/uart_module/uart.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/newmain.o.d ${OBJECTDIR}/adc_module/adc.o.d ${OBJECTDIR}/timer_module/timer.o.d ${OBJECTDIR}/uart_module/uart.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/adc_module/adc.o ${OBJECTDIR}/timer_module/timer.o ${OBJECTDIR}/uart_module/uart.o ${OBJECTDIR}/newmain.o ${OBJECTDIR}/adc_module/adc.o ${OBJECTDIR}/timer_module/timer.o ${OBJECTDIR}/uart_module/uart.o ${OBJECTDIR}/pwm_module/pwm.o ${OBJECTDIR}/pwm_module/pwm.o ${OBJECTDIR}/digital_sensors/HCSR.o ${OBJECTDIR}/digital_sensors/HCSR.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/adc_module/adc.o.d ${OBJECTDIR}/timer_module/timer.o.d ${OBJECTDIR}/uart_module/uart.o.d ${OBJECTDIR}/newmain.o.d ${OBJECTDIR}/adc_module/adc.o.d ${OBJECTDIR}/timer_module/timer.o.d ${OBJECTDIR}/uart_module/uart.o.d ${OBJECTDIR}/pwm_module/pwm.o.d ${OBJECTDIR}/pwm_module/pwm.o.d ${OBJECTDIR}/digital_sensors/HCSR.o.d ${OBJECTDIR}/digital_sensors/HCSR.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/newmain.o ${OBJECTDIR}/adc_module/adc.o ${OBJECTDIR}/timer_module/timer.o ${OBJECTDIR}/uart_module/uart.o
+OBJECTFILES=${OBJECTDIR}/adc_module/adc.o ${OBJECTDIR}/timer_module/timer.o ${OBJECTDIR}/uart_module/uart.o ${OBJECTDIR}/newmain.o ${OBJECTDIR}/adc_module/adc.o ${OBJECTDIR}/timer_module/timer.o ${OBJECTDIR}/uart_module/uart.o ${OBJECTDIR}/pwm_module/pwm.o ${OBJECTDIR}/pwm_module/pwm.o ${OBJECTDIR}/digital_sensors/HCSR.o ${OBJECTDIR}/digital_sensors/HCSR.o
 
 # Source Files
-SOURCEFILES=newmain.c adc_module/adc.c timer_module/timer.c uart_module/uart.c
+SOURCEFILES=adc_module/adc.h timer_module/timer.h uart_module/uart.h newmain.c adc_module/adc.c timer_module/timer.c uart_module/uart.c pwm_module/pwm.h pwm_module/pwm.c digital_sensors/HCSR.h digital_sensors/HCSR.c
 
 
 
@@ -89,6 +89,24 @@ MP_LINKER_FILE_OPTION=,--script=p30F4013.gld
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: compile
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
+${OBJECTDIR}/adc_module/adc.o: adc_module/adc.h  .generated_files/flags/default/e7d5ce3dc4cf8958a7c2c381d94dcb1613d05a45 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+	@${MKDIR} "${OBJECTDIR}/adc_module" 
+	@${RM} ${OBJECTDIR}/adc_module/adc.o.d 
+	@${RM} ${OBJECTDIR}/adc_module/adc.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  adc_module/adc.h  -o ${OBJECTDIR}/adc_module/adc.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/adc_module/adc.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	
+${OBJECTDIR}/timer_module/timer.o: timer_module/timer.h  .generated_files/flags/default/fddfd4af5b6d04b0904c1ae9e744ad28e21a7c6d .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+	@${MKDIR} "${OBJECTDIR}/timer_module" 
+	@${RM} ${OBJECTDIR}/timer_module/timer.o.d 
+	@${RM} ${OBJECTDIR}/timer_module/timer.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  timer_module/timer.h  -o ${OBJECTDIR}/timer_module/timer.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/timer_module/timer.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	
+${OBJECTDIR}/uart_module/uart.o: uart_module/uart.h  .generated_files/flags/default/987de258b78a10a519d58f27607893fa6f22c6e4 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+	@${MKDIR} "${OBJECTDIR}/uart_module" 
+	@${RM} ${OBJECTDIR}/uart_module/uart.o.d 
+	@${RM} ${OBJECTDIR}/uart_module/uart.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  uart_module/uart.h  -o ${OBJECTDIR}/uart_module/uart.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/uart_module/uart.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	
 ${OBJECTDIR}/newmain.o: newmain.c  .generated_files/flags/default/180cb968dce2558cf85fc1a2e6ba58ba347eb6b7 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/newmain.o.d 
@@ -113,7 +131,49 @@ ${OBJECTDIR}/uart_module/uart.o: uart_module/uart.c  .generated_files/flags/defa
 	@${RM} ${OBJECTDIR}/uart_module/uart.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  uart_module/uart.c  -o ${OBJECTDIR}/uart_module/uart.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/uart_module/uart.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
+${OBJECTDIR}/pwm_module/pwm.o: pwm_module/pwm.h  .generated_files/flags/default/882cbf31be72605014b0472be218be02b4ff6ed2 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+	@${MKDIR} "${OBJECTDIR}/pwm_module" 
+	@${RM} ${OBJECTDIR}/pwm_module/pwm.o.d 
+	@${RM} ${OBJECTDIR}/pwm_module/pwm.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  pwm_module/pwm.h  -o ${OBJECTDIR}/pwm_module/pwm.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/pwm_module/pwm.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	
+${OBJECTDIR}/pwm_module/pwm.o: pwm_module/pwm.c  .generated_files/flags/default/993f6997ff171ad65e515b173d961d39e2996689 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+	@${MKDIR} "${OBJECTDIR}/pwm_module" 
+	@${RM} ${OBJECTDIR}/pwm_module/pwm.o.d 
+	@${RM} ${OBJECTDIR}/pwm_module/pwm.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  pwm_module/pwm.c  -o ${OBJECTDIR}/pwm_module/pwm.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/pwm_module/pwm.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	
+${OBJECTDIR}/digital_sensors/HCSR.o: digital_sensors/HCSR.h  .generated_files/flags/default/f6a9b822fed3af49879a6d0daafcd58b66509e39 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+	@${MKDIR} "${OBJECTDIR}/digital_sensors" 
+	@${RM} ${OBJECTDIR}/digital_sensors/HCSR.o.d 
+	@${RM} ${OBJECTDIR}/digital_sensors/HCSR.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  digital_sensors/HCSR.h  -o ${OBJECTDIR}/digital_sensors/HCSR.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/digital_sensors/HCSR.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	
+${OBJECTDIR}/digital_sensors/HCSR.o: digital_sensors/HCSR.c  .generated_files/flags/default/c9e14bf2946894e22a7f38e27a0903d75d94303a .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+	@${MKDIR} "${OBJECTDIR}/digital_sensors" 
+	@${RM} ${OBJECTDIR}/digital_sensors/HCSR.o.d 
+	@${RM} ${OBJECTDIR}/digital_sensors/HCSR.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  digital_sensors/HCSR.c  -o ${OBJECTDIR}/digital_sensors/HCSR.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/digital_sensors/HCSR.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	
 else
+${OBJECTDIR}/adc_module/adc.o: adc_module/adc.h  .generated_files/flags/default/cc1b050734a60f2ee3a4a49a389e020a6a8b5bbf .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+	@${MKDIR} "${OBJECTDIR}/adc_module" 
+	@${RM} ${OBJECTDIR}/adc_module/adc.o.d 
+	@${RM} ${OBJECTDIR}/adc_module/adc.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  adc_module/adc.h  -o ${OBJECTDIR}/adc_module/adc.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/adc_module/adc.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	
+${OBJECTDIR}/timer_module/timer.o: timer_module/timer.h  .generated_files/flags/default/90dadbdb06b5481d2ea632f584b90ccdfb208127 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+	@${MKDIR} "${OBJECTDIR}/timer_module" 
+	@${RM} ${OBJECTDIR}/timer_module/timer.o.d 
+	@${RM} ${OBJECTDIR}/timer_module/timer.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  timer_module/timer.h  -o ${OBJECTDIR}/timer_module/timer.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/timer_module/timer.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	
+${OBJECTDIR}/uart_module/uart.o: uart_module/uart.h  .generated_files/flags/default/3968a99db4624edb62043d57e717165ba88160ab .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+	@${MKDIR} "${OBJECTDIR}/uart_module" 
+	@${RM} ${OBJECTDIR}/uart_module/uart.o.d 
+	@${RM} ${OBJECTDIR}/uart_module/uart.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  uart_module/uart.h  -o ${OBJECTDIR}/uart_module/uart.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/uart_module/uart.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	
 ${OBJECTDIR}/newmain.o: newmain.c  .generated_files/flags/default/5b32557890fb653ec4746cb8bad98966fa4fcb92 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/newmain.o.d 
@@ -137,6 +197,30 @@ ${OBJECTDIR}/uart_module/uart.o: uart_module/uart.c  .generated_files/flags/defa
 	@${RM} ${OBJECTDIR}/uart_module/uart.o.d 
 	@${RM} ${OBJECTDIR}/uart_module/uart.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  uart_module/uart.c  -o ${OBJECTDIR}/uart_module/uart.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/uart_module/uart.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	
+${OBJECTDIR}/pwm_module/pwm.o: pwm_module/pwm.h  .generated_files/flags/default/1e205ff59be63c65c18f0912ccd4314d30c583ce .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+	@${MKDIR} "${OBJECTDIR}/pwm_module" 
+	@${RM} ${OBJECTDIR}/pwm_module/pwm.o.d 
+	@${RM} ${OBJECTDIR}/pwm_module/pwm.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  pwm_module/pwm.h  -o ${OBJECTDIR}/pwm_module/pwm.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/pwm_module/pwm.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	
+${OBJECTDIR}/pwm_module/pwm.o: pwm_module/pwm.c  .generated_files/flags/default/5dd289294df43756f8e6630346330073ecc43994 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+	@${MKDIR} "${OBJECTDIR}/pwm_module" 
+	@${RM} ${OBJECTDIR}/pwm_module/pwm.o.d 
+	@${RM} ${OBJECTDIR}/pwm_module/pwm.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  pwm_module/pwm.c  -o ${OBJECTDIR}/pwm_module/pwm.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/pwm_module/pwm.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	
+${OBJECTDIR}/digital_sensors/HCSR.o: digital_sensors/HCSR.h  .generated_files/flags/default/836596c9d505cccc7ce35f21d3948e133b8d540 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+	@${MKDIR} "${OBJECTDIR}/digital_sensors" 
+	@${RM} ${OBJECTDIR}/digital_sensors/HCSR.o.d 
+	@${RM} ${OBJECTDIR}/digital_sensors/HCSR.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  digital_sensors/HCSR.h  -o ${OBJECTDIR}/digital_sensors/HCSR.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/digital_sensors/HCSR.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	
+${OBJECTDIR}/digital_sensors/HCSR.o: digital_sensors/HCSR.c  .generated_files/flags/default/b9c718833bf413bfc42c2081845d1069f8d621ff .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+	@${MKDIR} "${OBJECTDIR}/digital_sensors" 
+	@${RM} ${OBJECTDIR}/digital_sensors/HCSR.o.d 
+	@${RM} ${OBJECTDIR}/digital_sensors/HCSR.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  digital_sensors/HCSR.c  -o ${OBJECTDIR}/digital_sensors/HCSR.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/digital_sensors/HCSR.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
 endif
 

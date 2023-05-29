@@ -5,9 +5,12 @@
         <group>
             <file>file:/D:/VII%20SEMESTAR/Primenjena%20elektronika/Automobil-koji-izbegava-prepreke/Firmware.X/newmain.c</file>
             <file>file:/D:/VII%20SEMESTAR/Primenjena%20elektronika/Automobil-koji-izbegava-prepreke/Firmware.X/timer_module/timer.h</file>
-            <file>file:/D:/VII%20SEMESTAR/Primenjena%20elektronika/Automobil-koji-izbegava-prepreke/Firmware.X/uart_module/uart.h</file>
+            <file>file:/D:/VII%20SEMESTAR/Primenjena%20elektronika/Automobil-koji-izbegava-prepreke/Firmware.X/pwm_module/pwm.c</file>
+            <file>file:/D:/VII%20SEMESTAR/Primenjena%20elektronika/Automobil-koji-izbegava-prepreke/Firmware.X/digital_sensors/HCSR.h</file>
+            <file>file:/D:/VII%20SEMESTAR/Primenjena%20elektronika/Automobil-koji-izbegava-prepreke/Firmware.X/adc_module/adc.c</file>
             <file>file:/D:/VII%20SEMESTAR/Primenjena%20elektronika/Automobil-koji-izbegava-prepreke/Firmware.X/timer_module/timer.c</file>
-            <file>file:/D:/VII%20SEMESTAR/Primenjena%20elektronika/Automobil-koji-izbegava-prepreke/Firmware.X/uart_module/uart.c</file>
+            <file>file:/D:/VII%20SEMESTAR/Primenjena%20elektronika/Automobil-koji-izbegava-prepreke/Firmware.X/digital_sensors/HCSR.c</file>
+            <file>file:/D:/VII%20SEMESTAR/Primenjena%20elektronika/Automobil-koji-izbegava-prepreke/Firmware.X/pwm_module/pwm.h</file>
         </group>
     </open-files>
 </project-private>
