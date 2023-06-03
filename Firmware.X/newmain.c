@@ -21,6 +21,7 @@
 #include "uart_module/uart.h"
 #include "pwm_module/pwm.h"
 #include "digital_sensors/HCSR.h"
+//#include "motor_module/motor.h"
 
 _FOSC(CSW_FSCM_OFF & XT_PLL4);
 _FWDT(WDT_OFF);
@@ -29,8 +30,8 @@ _FWDT(WDT_OFF);
 /// Macros
 /*************************************************************/
 #define SIZE_OF_WORD (6)
-#define MAX_MEASURED_TIME (0xFFFF) // 2^16 because timer 4 and 5 are 16bit timers
 #define SPEED_OF_SOUND (0.0343) // centimeters per microsecond
+#define INSTRUCTION_CLOCK_PERIOD (0.1) // microseconds
 
 /*************************************************************/
 /// Variables
@@ -38,10 +39,12 @@ _FWDT(WDT_OFF);
 static unsigned int sharp_value, RsenseA_value, RsenseB_value;
 static int us_counter, ms_counter;
 static unsigned char tempRX1_debug, tempRX2_bluetooth;
-static unsigned char word_Start[SIZE_OF_WORD];
+static unsigned char word_start[SIZE_OF_WORD];
 static unsigned char position=0;
-static unsigned int measured_distance_left = 0;
-static unsigned int measured_distance_right = 0;
+static float measured_distance_left = 0;
+static float measured_distance_right = 0;
+static unsigned char time_overflow_left=0;
+static unsigned char time_overflow_right=0;
 
 
 /*************************************************************/
@@ -71,79 +74,34 @@ void __attribute__ ((__interrupt__, no_auto_psv)) _T3Interrupt(void)
     IFS0bits.T3IF = 0;     
 }
 
-/// Interrupt Service Routine(ISR) for Timer4
+/// Interrupt Service Routine(ISR) for Timer4 - left position sensor
 void __attribute__ ((__interrupt__, no_auto_psv)) _T4Interrupt(void) 
 {
     TMR4 = 0;
+    ECHO_LEFT = 0;
+    time_overflow_left = 1;
     IFS1bits.T4IF = 0;     
 }
 
-/// Interrupt Service Routine(ISR) for Timer5
+/// Interrupt Service Routine(ISR) for Timer5 - right position sensor
 void __attribute__ ((__interrupt__, no_auto_psv)) _T5Interrupt(void) 
 {
     TMR5 = 0;
+    ECHO_RIGHT = 0;  
+    time_overflow_right = 1;
     IFS1bits.T5IF = 0;     
 }
-/// Interrupt Service Routine(ISR) for AD conversion
+/// Interrupt Service Routine(ISR) for AD conversion - front position sensor
 void __attribute__ ((__interrupt__, no_auto_psv)) _ADCInterrupt(void) 
 {
     sharp_value=ADCBUF0; // obstacle distance from the front side
-    RsenseA_value=ADCBUF1;
-    RsenseB_value=ADCBUF2;
+    RsenseA_value=ADCBUF1; // sensing resistor for the current of the front motor 
+    RsenseB_value=ADCBUF2;  // sensing resistor for the current of the back motor 
    
     ADCON1bits.ADON = 0;
     IFS0bits.ADIF = 0;
 } 
 
-/// Interrupt Service Routine(ISR) for left HC-SR04 sensor
-void __attribute__ ((__interrupt__, no_auto_psv)) _INT0Interrupt(void)
-{     
-    if(ECHO_LEFT == 1)  //  the value of the echo pin becomes 1 (the rising edge detected)
-    {
-        INTCON2bits.INT0EP = 1; //interrupt 0 is sensitive to the falling edge
-        
-        TMR4 = 0; // reset T4
-        T4CONbits.TON = 1; // turn on T4, time measurement begins 
-    }
-    else           // the value of the echo pin becomes 0 (the falling edge detected)
-    {
-        T4CONbits.TON = 0;  // turn off T4, time measurement stops
-        unsigned int measured_time_left = TMR4;
-        if(measured_time_left >= MAX_MEASURED_TIME)
-        {
-            measured_time_left = MAX_MEASURED_TIME;
-        }
-        // measured_time_left/2 because the ultrasonic pulse travels to the obstacle and back
-        measured_distance_left = (unsigned int)((measured_time_left/2)*SPEED_OF_SOUND);
-        INTCON2bits.INT0EP = 0; //interrupt 0 is sensitive to the rising edge
-    }
-    IFS0bits.INT0IF = 0;
-}
-
-/// Interrupt Service Routine(ISR) for right HC-SR04 sensor
-void __attribute__ ((__interrupt__, no_auto_psv)) _INT1Interrupt(void)
-{     
-    if(ECHO_RIGHT == 1)  //  the value of the echo pin becomes 1 (the rising edge detected)
-    {
-        INTCON2bits.INT1EP = 1; //interrupt 1 is sensitive to the falling edge
-        
-        TMR5 = 0; // reset T5
-        T5CONbits.TON = 1; // turn on T5, time measurement begins 
-    }
-    else           // the value of the echo pin becomes 0 (the falling edge detected)
-    {
-        T5CONbits.TON = 0;  // turn off T5, time measurement stops
-        unsigned int measured_time_right = TMR5;
-        if(measured_time_right >= MAX_MEASURED_TIME)
-        {
-            measured_time_right = MAX_MEASURED_TIME;
-        }
-        // measured_time_right/2 because the ultrasonic pulse travels to the obstacle and back
-        measured_distance_right = (unsigned int)((measured_time_right/2)*SPEED_OF_SOUND);
-        INTCON2bits.INT1EP = 0; //interrupt 1 is sensitive to the rising edge
-    }
-    IFS1bits.INT1IF = 0;
-}
 
 /// Interrupt Service Routine(ISR) for UART1
 void __attribute__ ((__interrupt__, no_auto_psv)) _U1RXInterrupt(void) 
@@ -161,20 +119,20 @@ void __attribute__ ((__interrupt__, no_auto_psv)) _U2RXInterrupt(void)
     
     if(tempRX2_bluetooth != 0)
     {
-        word_Start[position] = tempRX2_bluetooth;
+        word_start[position] = tempRX2_bluetooth;
         tempRX2_bluetooth = 0;
 
         if(position < SIZE_OF_WORD - 1)
         {
            position++;
-           word_Start[position] = 0;
+           word_start[position] = 0;
         }
         else position = 0;
     }
 } 
 
 /*************************************************************/
-// FUNCTIONS FOR TIMERS
+// FUNCTIONS FOR DELAYS
 /*************************************************************/
 
 /// Function for delay in miliseconds 
@@ -200,7 +158,7 @@ static void MeasureRightDistance();
  * @return None
  */
 int main(int argc, char** argv) {
-
+    
     ///INITIALIZATION
     ConfigureADCPins();
     InitADC();
@@ -213,50 +171,58 @@ int main(int argc, char** argv) {
     InitUART2();
     InitPWM();
     ConfigureHCSR04Pins();
-    InitHCSR04Sensors();
-    memset(word_Start, 0, sizeof(word_Start));      
-    
-    /// ADCON1bits.ADON=1;
-    WriteStringUART1("Init\n");
+    memset(word_start, 0, sizeof(word_start));      
+    WriteStringUART2("Init");
+    WriteCharUART2(13);
     
     
     while(1)
     {
        
+       
         
         
+       
        /* 
-        while (word_Start[0]!='S' 
-                || word_Start[1]!='T'
-                || word_Start[2]!='A'
-                || word_Start[3]!='R'
-                || word_Start[4]!='T'
-                || word_Start[5]!='\0'
+        memset(word_start, 0, sizeof(word_start));  
+       position = 0;
+       while (word_start[0]!='S' 
+                || word_start[1]!='T'
+                || word_start[2]!='A'
+                || word_start[3]!='R'
+                || word_start[4]!='T'
+                || word_start[5]!='\0'
                 );
-        memset(word_Start, 0, sizeof(word_Start));  
+        WriteStringUART2("The car is started.");
+        WriteCharUART2(13); 
+        
+        memset(word_start, 0, sizeof(word_start));  
         position = 0;
-        WriteStringUART2("Autic je pokrenut.");
-        
-        
-        while(1)
+        while (word_start[0]!='S' 
+                || word_start[1]!='T'
+                || word_start[2]!='O'
+                || word_start[3]!='P'
+                || word_start[4]!='\0'
+                )
         {
-            ADCON1bits.ADON=1;
+            MeasureFrontDistance();
+            WriteStringUART2("Analog sensor: ");
             WriteUART2dec2string(sharp_value);
-            WriteStringUART2("----");
-            DelayMs(1000);
+            WriteCharUART2(13);
+
+            MeasureLeftDistance();
+            WriteStringUART2("Left distance: ");
+            WriteObstacleDistance2(measured_distance_left);
+            WriteCharUART2(13);
+            MeasureRightDistance();
+            WriteStringUART2("Right distance: ");
+            WriteObstacleDistance2(measured_distance_right);
+            WriteCharUART2(13);
         }
-        
-        
-        
-        while (word_Start[0]!='S' 
-                || word_Start[1]!='T'
-                || word_Start[2]!='O'
-                || word_Start[3]!='P'
-                || word_Start[4]!='\0'
-                );
-        memset(word_Start, 0, sizeof(word_Start));  
-        position = 0;
-        WriteStringUART2("Autic je zaustavljen.");   */
+        WriteStringUART2("The car is stopped.");
+        WriteCharUART2(13);
+ 
+        */
     }
     return (EXIT_SUCCESS);
 }
@@ -298,22 +264,44 @@ static void DelayUs (int vreme)
  */
 static void MeasureFrontDistance()
 {
-    ADCON1bits.ADON=0;
-    DelayMs(10);
     ADCON1bits.ADON=1;
+    DelayMs(10);
+    ADCON1bits.ADON=0;
+    // potrebno je izmereni napon pretvoriti u udaljenost
 }
 
 /* 
  * @brief - Function for sending left trigger signal
  * @param None
- * @return None
+ * @return measured_distance_left - Measured distance between left sensor and obstacle
  */
 static void MeasureLeftDistance()
 {
     // logical one lasts for 10us
     TRIG_LEFT = 1;
-    DelayUs(10);
+    DelayUs(3); //  3 instead of 10 to make logical one lasts for 10us
     TRIG_LEFT = 0;
+    DelayUs(3);
+    while(!ECHO_LEFT); //  the value of the echo pin becomes 1 (the rising edge detected)
+    TMR4 = 0; // reset T4
+    IFS1bits.T4IF = 0;
+    T4CONbits.TON = 1; // turn on T4, time measurement begins 
+    while(ECHO_LEFT);        // the value of the echo pin becomes 0 (the falling edge detected)
+    T4CONbits.TON = 0;  // turn off T4, time measurement stops
+    unsigned int measured_time_left; 
+    if(time_overflow_left == 1)     // time overflow happens
+    {
+        measured_time_left = TMR4_period;
+        time_overflow_left = 0;
+    }
+    else                            // the signal sent has returned
+    {
+        measured_time_left = TMR4;
+    }
+    TMR4 = 0;
+    // operation /2 is used because the ultrasonic pulse travels to the obstacle and back
+    // operation *INSTRUCTION_CLOCK_PERIOD is used to get the time in microseconds
+    measured_distance_left = (measured_time_left*INSTRUCTION_CLOCK_PERIOD)/2*SPEED_OF_SOUND;        
 }
 
 /* 
@@ -325,6 +313,27 @@ static void MeasureRightDistance()
 {
     // logical one lasts for 10us
     TRIG_RIGHT = 1;
-    DelayUs(10);
+    DelayUs(3); //  3 instead of 10 to make logical one lasts for 10us
     TRIG_RIGHT = 0;
+    DelayUs(3);
+    while(!ECHO_RIGHT); //  the value of the echo pin becomes 1 (the rising edge detected)
+    TMR5 = 0; // reset T5
+    IFS1bits.T5IF = 0;
+    T5CONbits.TON = 1; // turn on T5, time measurement begins 
+    while(ECHO_RIGHT);   // the value of the echo pin becomes 0 (the falling edge detected)
+    T5CONbits.TON = 0;  // turn off T5, time measurement stops
+    unsigned int measured_time_right; 
+    if(time_overflow_right == 1)     // time overflow happens
+    {
+        measured_time_right = TMR5_period;
+        time_overflow_right == 0;
+    }
+    else                            // the signal sent has returned
+    {
+        measured_time_right = TMR5;
+    }
+    TMR5 = 0;
+    // operation /2 is used because the ultrasonic pulse travels to the obstacle and back
+    // operation *INSTRUCTION_CLOCK_PERIOD is used to get the time in microseconds
+    measured_distance_right = (measured_time_right*INSTRUCTION_CLOCK_PERIOD)/2*SPEED_OF_SOUND;        
 }

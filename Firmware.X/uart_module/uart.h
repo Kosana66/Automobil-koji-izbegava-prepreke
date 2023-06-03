@@ -35,5 +35,8 @@ void WriteStringUART2(register const char *str);
 /// Function for writing a four-digit number over UART2
 void WriteUART2dec2string(unsigned int data);
 
+/// Function for writing a distance from obstacle over UART2
+void WriteObstacleDistance2(float data);
+
 #endif	/* UART_H */
 

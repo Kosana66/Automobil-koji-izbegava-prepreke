@@ -13,9 +13,9 @@
 
 #define TMR1_period 10000   // Tosc = 1/Fosc = 1/10000000 = 0.1us , 0.1us * 10000 = 1ms
 #define TMR2_period 10      // Tosc = 1/Fosc = 1/10000000 = 0.1us , 0.1us * 10 = 1us
-#define TMR3_period 500    // Tpwm = (PR3 + 1) * 4 * Tosc * Prescale_Value, Prescale_Value = 1
-#define TMR4_period 10
-#define TMR5_period 10
+#define TMR3_period 500    // Tpwm = 40us = (PR3 + 1) * Tosc * Prescale_Value, Prescale_Value = 1, fpwm = 25KHz
+#define TMR4_period 40000
+#define TMR5_period 40000 //max counter = 4ms 
 
 /// Function for initializing Timer1
 void Init_T1(void);

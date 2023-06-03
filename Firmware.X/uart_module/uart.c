@@ -139,3 +139,28 @@ void WriteUART2dec2string(unsigned int data)
     data=data-temp*10;
     WriteCharUART2(data+'0');
 }
+
+/* 
+ * @brief - Function for writing a distance from obstacle over UART2
+ * @param data - The distance being sent
+ * @return None
+ */
+void WriteObstacleDistance2(float data)
+{
+    unsigned char temp;
+    data = data*10;
+    temp=data/10000;
+    WriteCharUART2(temp+'0');  
+    data=data-temp*10000;
+    temp=data/1000;
+    WriteCharUART2(temp+'0');
+    data=data-temp*1000;
+    temp=data/100;
+    WriteCharUART2(temp+'0');
+    data=data-temp*100;
+    temp=data/10;
+    WriteCharUART2(temp+'0');
+    WriteCharUART2('.');
+    data=data-temp*10;
+    WriteCharUART2(data+'0');
+}

@@ -20,7 +20,4 @@
 /// Function for configuring pins for HC - SR04 sensors
 void ConfigureHCSR04Pins(void);
 
-/// Function for initialization HC - SR04 sensors
-void InitHCSR04Sensors(void);
-
 #endif	/* HCSR_H */

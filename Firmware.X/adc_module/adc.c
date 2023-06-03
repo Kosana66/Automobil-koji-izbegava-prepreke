@@ -18,15 +18,15 @@
 void ConfigureADCPins(void)
 {
     /// Pin for sharp sensor
-    ADPCFGbits.PCFG1=0;  /// 0 = Analog input pin in Analog mode, port read input disabled  
-    TRISBbits.TRISB1=1;  /// 1 = input pin
+    ADPCFGbits.PCFG1=0;     // analog pin  
+    TRISBbits.TRISB1=1;     // input pin
     /// Pin for RsenseA 
-    ADPCFGbits.PCFG9=0; 
-    TRISBbits.TRISB9=1;
+    ADPCFGbits.PCFG9=0;     // analog pin  
+    TRISBbits.TRISB9=1;     // input pin
     /// Pin for RsenseB
-    ADPCFGbits.PCFG12=0; 
-    TRISBbits.TRISB12=1;  
-}
+    ADPCFGbits.PCFG12=0;    // analog pin   
+    TRISBbits.TRISB12=1;    // input pin
+}   
 
 /* 
  * @brief - Function for initialization AD conversion

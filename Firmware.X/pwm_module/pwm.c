@@ -18,6 +18,9 @@
  */
 void InitPWM()
 {
+    TRISDbits.TRISD0 = 0;   // output pin ENA
+    TRISDbits.TRISD1 = 0;   // output pin ENB
+    
     //the PWM mode of of the output compare module without input fault protection
     OC1CONbits.OCM=0b110; 
     OC2CONbits.OCM=0b110; 
@@ -41,10 +44,13 @@ void InitPWM()
  */
 void DutyCyclePWM(int duty_cycle)
 {
-    // Calculate the duty cycle based on the given value from 0.0 to 1.0
-    unsigned int pwm_value = (unsigned int)((duty_cycle/100) * TMR3_period);
+    if(duty_cycle>=0 && duty_cycle<=100)
+    {
+        // Calculate the duty cycle based on the given value from 0.0 to 1.0
+        float pwm_value = (float)duty_cycle * (TMR3_period-1) /100;
 
-    // Set the new duty cycle
-    OC1RS = pwm_value;   
-    OC2RS = pwm_value;
+        // Set the new duty cycle
+        OC1RS = (int)pwm_value;   
+        OC2RS = (int)pwm_value;
+    }
 }

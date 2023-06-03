@@ -9,6 +9,7 @@
       <itemPath>uart_module/uart.h</itemPath>
       <itemPath>pwm_module/pwm.h</itemPath>
       <itemPath>digital_sensors/HCSR.h</itemPath>
+      <itemPath>motor_module/motor.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -23,6 +24,7 @@
       <itemPath>uart_module/uart.c</itemPath>
       <itemPath>pwm_module/pwm.c</itemPath>
       <itemPath>digital_sensors/HCSR.c</itemPath>
+      <itemPath>motor_module/motor.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
