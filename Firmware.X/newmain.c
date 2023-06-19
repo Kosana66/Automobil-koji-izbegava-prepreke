@@ -21,7 +21,7 @@
 #include "uart_module/uart.h"
 #include "pwm_module/pwm.h"
 #include "digital_sensors/HCSR.h"
-//#include "motor_module/motor.h"
+#include "motor_module/motor.h"
 
 _FOSC(CSW_FSCM_OFF & XT_PLL4);
 _FWDT(WDT_OFF);
@@ -36,11 +36,12 @@ _FWDT(WDT_OFF);
 /*************************************************************/
 /// Variables
 /*************************************************************/
-static unsigned int sharp_value, RsenseA_value, RsenseB_value;
+static unsigned int sharp_value;
 static int us_counter, ms_counter;
 static unsigned char tempRX1_debug, tempRX2_bluetooth;
 static unsigned char word_start[SIZE_OF_WORD];
-static unsigned char position=0;
+static unsigned char position_UART2=0;
+static int duty_cycle_entered;
 static float measured_distance_left = 0;
 static float measured_distance_right = 0;
 static unsigned char time_overflow_left=0;
@@ -95,8 +96,6 @@ void __attribute__ ((__interrupt__, no_auto_psv)) _T5Interrupt(void)
 void __attribute__ ((__interrupt__, no_auto_psv)) _ADCInterrupt(void) 
 {
     sharp_value=ADCBUF0; // obstacle distance from the front side
-    RsenseA_value=ADCBUF1; // sensing resistor for the current of the front motor 
-    RsenseB_value=ADCBUF2;  // sensing resistor for the current of the back motor 
    
     ADCON1bits.ADON = 0;
     IFS0bits.ADIF = 0;
@@ -108,7 +107,6 @@ void __attribute__ ((__interrupt__, no_auto_psv)) _U1RXInterrupt(void)
 {
     IFS0bits.U1RXIF = 0;
     tempRX1_debug=U1RXREG;
-    WriteCharUART1(tempRX1_debug);
 } 
 
 /// Interrupt Service Routine(ISR) for UART2
@@ -119,15 +117,15 @@ void __attribute__ ((__interrupt__, no_auto_psv)) _U2RXInterrupt(void)
     
     if(tempRX2_bluetooth != 0)
     {
-        word_start[position] = tempRX2_bluetooth;
+        word_start[position_UART2] = tempRX2_bluetooth;
         tempRX2_bluetooth = 0;
 
-        if(position < SIZE_OF_WORD - 1)
+        if(position_UART2 < SIZE_OF_WORD - 1)
         {
-           position++;
-           word_start[position] = 0;
+           position_UART2++;
+           word_start[position_UART2] = 0;
         }
-        else position = 0;
+        else position_UART2 = 0;
     }
 } 
 
@@ -151,6 +149,12 @@ static void MeasureLeftDistance();
 /// Function for measuring obstacle distance from the right side
 static void MeasureRightDistance();
 
+/*************************************************************/
+// FUNCTIONS FOR INCREASING/DECREASING DUTY CYCLE
+/*************************************************************/
+
+/// Function for increasing/decreasing duty cycle for motors
+static void ChangeDutyCycle();
 
 /* 
  * @brief - Function of main program
@@ -171,56 +175,109 @@ int main(int argc, char** argv) {
     InitUART2();
     InitPWM();
     ConfigureHCSR04Pins();
-    memset(word_start, 0, sizeof(word_start));      
-    WriteStringUART2("Init");
+    ConfigureMotorsPins(); 
+    duty_cycle_entered = 80;
+    DutyCyclePWM(duty_cycle_entered);
+    
+    TRISBbits.TRISB8 = 0;
+    ADPCFGbits.PCFG8 = 1;
+    LATBbits.LATB8 = 1;
+    
+    
+    memset(word_start, 0, sizeof(word_start));  
+    position_UART2 = 0;
+    WriteStringUART2("Write START.");
+    WriteCharUART2(13);
+    while (word_start[0]!='S' 
+        || word_start[1]!='T'
+        || word_start[2]!='A'
+        || word_start[3]!='R'
+        || word_start[4]!='T'
+        || word_start[5]!='\0'
+    );
+    WriteStringUART2("The car is started.");
     WriteCharUART2(13);
     
+     
     
     while(1)
-    {
-       
-       
+    {    
+        LATBbits.LATB8 = ~LATBbits.LATB8;
         
+        
+        DriveForward();
+        MeasureLeftDistance();
+        MeasureRightDistance();
+                
+       MeasureFrontDistance();
+        if(sharp_value > 1100)
+        {
+            WriteStringUART2("prepreka napred ");
+            StopMotors();
+            DelayMs(1000);
+            TurnLeft();
+            DelayMs(1400);
+            StopMotors();
+            DelayMs(1000);
+        }
+       /* 
+        
+        ChangeDutyCycle();
+        TurnLeft();
+            WriteStringUART2("levo");
+            WriteCharUART2(13);
+        DelayMs(2000);
+        StopMotors();
+        DelayMs(2000);
+        TurnRight();
+            WriteStringUART2("desno");
+            WriteCharUART2(13);
+        DelayMs(2000);
+        StopMotors();
+        DelayMs(2000);
+        
+        
+        MeasureFrontDistance();
+        MeasureRightDistance();
+        MeasureLeftDistance();
+        
+        WriteStringUART2("Front distance: ");
+        WriteObstacleDistance2(sharp_value);
+        WriteCharUART2(13);
+        DelayMs(1000);
+        WriteStringUART2("Left distance: ");
+        WriteObstacleDistance2(measured_distance_left);
+        WriteCharUART2(13);
+        DelayMs(1000);
+        WriteStringUART2("Right distance: ");
+        WriteObstacleDistance2(measured_distance_right);
+        WriteCharUART2(13);
+        DelayMs(1000);
+        ChangeDutyCycle();
+        * 
+        * 
+        */
         
        
        /* 
-        memset(word_start, 0, sizeof(word_start));  
-       position = 0;
-       while (word_start[0]!='S' 
-                || word_start[1]!='T'
-                || word_start[2]!='A'
-                || word_start[3]!='R'
-                || word_start[4]!='T'
-                || word_start[5]!='\0'
-                );
-        WriteStringUART2("The car is started.");
-        WriteCharUART2(13); 
         
-        memset(word_start, 0, sizeof(word_start));  
-        position = 0;
-        while (word_start[0]!='S' 
-                || word_start[1]!='T'
-                || word_start[2]!='O'
-                || word_start[3]!='P'
-                || word_start[4]!='\0'
-                )
-        {
-            MeasureFrontDistance();
-            WriteStringUART2("Analog sensor: ");
-            WriteUART2dec2string(sharp_value);
-            WriteCharUART2(13);
-
-            MeasureLeftDistance();
-            WriteStringUART2("Left distance: ");
-            WriteObstacleDistance2(measured_distance_left);
-            WriteCharUART2(13);
-            MeasureRightDistance();
-            WriteStringUART2("Right distance: ");
-            WriteObstacleDistance2(measured_distance_right);
-            WriteCharUART2(13);
-        }
-        WriteStringUART2("The car is stopped.");
-        WriteCharUART2(13);
+        
+        if(sharp_value > 600) 
+            {
+                StopMotors();
+                DelayMs(1000);
+                if(measured_distance_left > 12.5) 
+                {
+                    TurnLeft();
+                    DelayMs(3000);
+                    StopMotors();
+                    DelayMs(1000);
+                }
+                TurnLeft();
+                DelayMs(3000);
+                StopMotors();
+                DelayMs(1000);
+            }
  
         */
     }
@@ -316,17 +373,17 @@ static void MeasureRightDistance()
     DelayUs(3); //  3 instead of 10 to make logical one lasts for 10us
     TRIG_RIGHT = 0;
     DelayUs(3);
-    while(!ECHO_RIGHT); //  the value of the echo pin becomes 1 (the rising edge detected)
+    while(!ECHO_RIGHT);//  the value of the echo pin becomes 1 (the rising edge detected)
     TMR5 = 0; // reset T5
     IFS1bits.T5IF = 0;
     T5CONbits.TON = 1; // turn on T5, time measurement begins 
-    while(ECHO_RIGHT);   // the value of the echo pin becomes 0 (the falling edge detected)
-    T5CONbits.TON = 0;  // turn off T5, time measurement stops
+    while(ECHO_RIGHT);        // the value of the echo pin becomes 0 (the falling edge detected)
+    T5CONbits.TON = 0;  // turn off T4, time measurement stops
     unsigned int measured_time_right; 
     if(time_overflow_right == 1)     // time overflow happens
     {
         measured_time_right = TMR5_period;
-        time_overflow_right == 0;
+        time_overflow_right = 0;
     }
     else                            // the signal sent has returned
     {
@@ -336,4 +393,28 @@ static void MeasureRightDistance()
     // operation /2 is used because the ultrasonic pulse travels to the obstacle and back
     // operation *INSTRUCTION_CLOCK_PERIOD is used to get the time in microseconds
     measured_distance_right = (measured_time_right*INSTRUCTION_CLOCK_PERIOD)/2*SPEED_OF_SOUND;        
+}
+
+/* 
+ * @brief - Function for increasing/decreasing duty cycle for motors
+ * @param None
+ * @return None
+ */
+static void ChangeDutyCycle()
+{
+    if(tempRX1_debug == '+' && duty_cycle_entered <= 90)
+    {
+        tempRX1_debug = 0;
+        duty_cycle_entered += 10;
+        DutyCyclePWM(duty_cycle_entered);
+        WriteStringUART1("Duty cycle was increased.");
+    }
+
+    else if(tempRX1_debug == '-' && duty_cycle_entered >= 10)
+    {
+        tempRX1_debug = 0;
+        duty_cycle_entered -= 10;
+        DutyCyclePWM(duty_cycle_entered);
+        WriteStringUART1("Duty cycle was decreased.");
+    } 
 }

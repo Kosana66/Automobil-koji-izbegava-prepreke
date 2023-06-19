@@ -30,8 +30,8 @@ void InitPWM()
     //initial PWM duty cycle
     OC1R = 0;  //Output Compare 1 Register
     OC2R = 0;  //Output Compare 1 Register
-    OC1RS = 300;   //Output Compare 1 Secondary Register
-    OC2RS = 300;   //Output Compare 2 Secondary Register
+    OC1RS = 250;   //Output Compare 1 Secondary Register
+    OC2RS = 250;   //Output Compare 2 Secondary Register
     
     // turn on timer 3
     T3CONbits.TON = 1; 

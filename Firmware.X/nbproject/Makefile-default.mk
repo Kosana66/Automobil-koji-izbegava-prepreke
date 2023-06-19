@@ -89,86 +89,86 @@ MP_LINKER_FILE_OPTION=,--script=p30F4013.gld
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: compile
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
-${OBJECTDIR}/newmain.o: newmain.c  .generated_files/flags/default/180cb968dce2558cf85fc1a2e6ba58ba347eb6b7 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+${OBJECTDIR}/newmain.o: newmain.c  .generated_files/flags/default/62ded4558a7ce497feef80e9561e6bd8865caf .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/newmain.o.d 
 	@${RM} ${OBJECTDIR}/newmain.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  newmain.c  -o ${OBJECTDIR}/newmain.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/newmain.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
-${OBJECTDIR}/adc_module/adc.o: adc_module/adc.c  .generated_files/flags/default/7b2447b7d9b6d9d6603c4c5cd23e81e21cb662db .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+${OBJECTDIR}/adc_module/adc.o: adc_module/adc.c  .generated_files/flags/default/50909d80f60996147d276766f7dd9f3b591b2358 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
 	@${MKDIR} "${OBJECTDIR}/adc_module" 
 	@${RM} ${OBJECTDIR}/adc_module/adc.o.d 
 	@${RM} ${OBJECTDIR}/adc_module/adc.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  adc_module/adc.c  -o ${OBJECTDIR}/adc_module/adc.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/adc_module/adc.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
-${OBJECTDIR}/timer_module/timer.o: timer_module/timer.c  .generated_files/flags/default/b2559cfd089e6526165b6208a85f0d6d5f3afc60 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+${OBJECTDIR}/timer_module/timer.o: timer_module/timer.c  .generated_files/flags/default/8bbab60d7742b88e85d4e6b9ec7eba0fa7564662 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
 	@${MKDIR} "${OBJECTDIR}/timer_module" 
 	@${RM} ${OBJECTDIR}/timer_module/timer.o.d 
 	@${RM} ${OBJECTDIR}/timer_module/timer.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  timer_module/timer.c  -o ${OBJECTDIR}/timer_module/timer.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/timer_module/timer.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
-${OBJECTDIR}/uart_module/uart.o: uart_module/uart.c  .generated_files/flags/default/1f0aedd36a5d3c7c222a4f9a29b42fdcc2c43eb8 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+${OBJECTDIR}/uart_module/uart.o: uart_module/uart.c  .generated_files/flags/default/7acf897c60f2a04d483bb3f9df56fbfc5c90d711 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
 	@${MKDIR} "${OBJECTDIR}/uart_module" 
 	@${RM} ${OBJECTDIR}/uart_module/uart.o.d 
 	@${RM} ${OBJECTDIR}/uart_module/uart.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  uart_module/uart.c  -o ${OBJECTDIR}/uart_module/uart.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/uart_module/uart.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
-${OBJECTDIR}/pwm_module/pwm.o: pwm_module/pwm.c  .generated_files/flags/default/993f6997ff171ad65e515b173d961d39e2996689 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+${OBJECTDIR}/pwm_module/pwm.o: pwm_module/pwm.c  .generated_files/flags/default/5db9eb9250b16c793c8f8143062d11299f61dccb .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
 	@${MKDIR} "${OBJECTDIR}/pwm_module" 
 	@${RM} ${OBJECTDIR}/pwm_module/pwm.o.d 
 	@${RM} ${OBJECTDIR}/pwm_module/pwm.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  pwm_module/pwm.c  -o ${OBJECTDIR}/pwm_module/pwm.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/pwm_module/pwm.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
-${OBJECTDIR}/digital_sensors/HCSR.o: digital_sensors/HCSR.c  .generated_files/flags/default/c9e14bf2946894e22a7f38e27a0903d75d94303a .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+${OBJECTDIR}/digital_sensors/HCSR.o: digital_sensors/HCSR.c  .generated_files/flags/default/9592cfefa0db9bfec61b1d8ec8fe39b4e9c3a6d5 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
 	@${MKDIR} "${OBJECTDIR}/digital_sensors" 
 	@${RM} ${OBJECTDIR}/digital_sensors/HCSR.o.d 
 	@${RM} ${OBJECTDIR}/digital_sensors/HCSR.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  digital_sensors/HCSR.c  -o ${OBJECTDIR}/digital_sensors/HCSR.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/digital_sensors/HCSR.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
-${OBJECTDIR}/motor_module/motor.o: motor_module/motor.c  .generated_files/flags/default/e347716b7baf929af5e2db5f0c6555d42a1570bd .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+${OBJECTDIR}/motor_module/motor.o: motor_module/motor.c  .generated_files/flags/default/f2cdca97ffddb73691b22492a8d23341bdc3855d .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
 	@${MKDIR} "${OBJECTDIR}/motor_module" 
 	@${RM} ${OBJECTDIR}/motor_module/motor.o.d 
 	@${RM} ${OBJECTDIR}/motor_module/motor.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  motor_module/motor.c  -o ${OBJECTDIR}/motor_module/motor.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/motor_module/motor.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
 else
-${OBJECTDIR}/newmain.o: newmain.c  .generated_files/flags/default/5b32557890fb653ec4746cb8bad98966fa4fcb92 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+${OBJECTDIR}/newmain.o: newmain.c  .generated_files/flags/default/5ddf4d40cb49c6f7a3ad49073fa706b9aca8f452 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/newmain.o.d 
 	@${RM} ${OBJECTDIR}/newmain.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  newmain.c  -o ${OBJECTDIR}/newmain.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/newmain.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
-${OBJECTDIR}/adc_module/adc.o: adc_module/adc.c  .generated_files/flags/default/b1b230861acb291ff079a8b4858f358d655c9060 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+${OBJECTDIR}/adc_module/adc.o: adc_module/adc.c  .generated_files/flags/default/dc56746cf7e22bfa543a54f7dcb80d7196ec0d3e .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
 	@${MKDIR} "${OBJECTDIR}/adc_module" 
 	@${RM} ${OBJECTDIR}/adc_module/adc.o.d 
 	@${RM} ${OBJECTDIR}/adc_module/adc.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  adc_module/adc.c  -o ${OBJECTDIR}/adc_module/adc.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/adc_module/adc.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
-${OBJECTDIR}/timer_module/timer.o: timer_module/timer.c  .generated_files/flags/default/aad3afce98fc94965b710ff796fbb4f596cded73 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+${OBJECTDIR}/timer_module/timer.o: timer_module/timer.c  .generated_files/flags/default/6d5d4a8670a90d51e3869be5cbd9a31a718a8574 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
 	@${MKDIR} "${OBJECTDIR}/timer_module" 
 	@${RM} ${OBJECTDIR}/timer_module/timer.o.d 
 	@${RM} ${OBJECTDIR}/timer_module/timer.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  timer_module/timer.c  -o ${OBJECTDIR}/timer_module/timer.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/timer_module/timer.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
-${OBJECTDIR}/uart_module/uart.o: uart_module/uart.c  .generated_files/flags/default/d7790ac719365e386eb8d09dd5d420bdeecfb25b .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+${OBJECTDIR}/uart_module/uart.o: uart_module/uart.c  .generated_files/flags/default/e3d11b3f1887c58573f005d28e26a311cbf369a2 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
 	@${MKDIR} "${OBJECTDIR}/uart_module" 
 	@${RM} ${OBJECTDIR}/uart_module/uart.o.d 
 	@${RM} ${OBJECTDIR}/uart_module/uart.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  uart_module/uart.c  -o ${OBJECTDIR}/uart_module/uart.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/uart_module/uart.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
-${OBJECTDIR}/pwm_module/pwm.o: pwm_module/pwm.c  .generated_files/flags/default/5dd289294df43756f8e6630346330073ecc43994 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+${OBJECTDIR}/pwm_module/pwm.o: pwm_module/pwm.c  .generated_files/flags/default/cb4e94fb19c06676f276a0d6b24c46bf2c48c9ac .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
 	@${MKDIR} "${OBJECTDIR}/pwm_module" 
 	@${RM} ${OBJECTDIR}/pwm_module/pwm.o.d 
 	@${RM} ${OBJECTDIR}/pwm_module/pwm.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  pwm_module/pwm.c  -o ${OBJECTDIR}/pwm_module/pwm.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/pwm_module/pwm.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
-${OBJECTDIR}/digital_sensors/HCSR.o: digital_sensors/HCSR.c  .generated_files/flags/default/b9c718833bf413bfc42c2081845d1069f8d621ff .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+${OBJECTDIR}/digital_sensors/HCSR.o: digital_sensors/HCSR.c  .generated_files/flags/default/b7329f2c85687703abae6a51dc1483ee2c2648f3 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
 	@${MKDIR} "${OBJECTDIR}/digital_sensors" 
 	@${RM} ${OBJECTDIR}/digital_sensors/HCSR.o.d 
 	@${RM} ${OBJECTDIR}/digital_sensors/HCSR.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  digital_sensors/HCSR.c  -o ${OBJECTDIR}/digital_sensors/HCSR.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/digital_sensors/HCSR.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
-${OBJECTDIR}/motor_module/motor.o: motor_module/motor.c  .generated_files/flags/default/87f62e5bc937a22a429e5c08584cdf334439d6ee .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+${OBJECTDIR}/motor_module/motor.o: motor_module/motor.c  .generated_files/flags/default/a2f26f522b3e1da80282b247400903ab370bf80 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
 	@${MKDIR} "${OBJECTDIR}/motor_module" 
 	@${RM} ${OBJECTDIR}/motor_module/motor.o.d 
 	@${RM} ${OBJECTDIR}/motor_module/motor.o 

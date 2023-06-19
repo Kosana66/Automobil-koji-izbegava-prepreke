@@ -31,8 +31,10 @@ void ConfigureMotorsPins()
  */
 void StopMotors()
 {
+    //in1 , in2 for right motor
     IN1=0;
     IN2=0;
+    //in3 , in4 for left motor
     IN3=0;
     IN4=0;
 }
@@ -46,9 +48,8 @@ void DriveForward()
 {
     IN1=1;
     IN2=0;
-    IN3=1;
-    IN4=0;
-    
+    IN3=0;
+    IN4=1; 
 }
 
 /* 
@@ -60,8 +61,8 @@ void DriveBackward()
 {
     IN1=0;
     IN2=1;
-    IN3=0;
-    IN4=1;
+    IN3=1;
+    IN4=0;
 }
 
 /* 
@@ -71,10 +72,10 @@ void DriveBackward()
  */
 void TurnLeft()
 {
-    IN1=0;
+    IN1=1;
     IN2=0;
-    IN3=0;
-    IN4=0;
+    IN3=1;
+    IN4=0; 
 }
 
 /* 
@@ -84,5 +85,8 @@ void TurnLeft()
  */
 void TurnRight()
 {
-    
+    IN1=0;
+    IN2=1;
+    IN3=0;
+    IN4=1; 
 }

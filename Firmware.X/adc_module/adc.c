@@ -20,12 +20,6 @@ void ConfigureADCPins(void)
     /// Pin for sharp sensor
     ADPCFGbits.PCFG1=0;     // analog pin  
     TRISBbits.TRISB1=1;     // input pin
-    /// Pin for RsenseA 
-    ADPCFGbits.PCFG9=0;     // analog pin  
-    TRISBbits.TRISB9=1;     // input pin
-    /// Pin for RsenseB
-    ADPCFGbits.PCFG12=0;    // analog pin   
-    TRISBbits.TRISB12=1;    // input pin
 }   
 
 /* 
@@ -49,7 +43,7 @@ void InitADC(void)
     /// 1 = Scan inputs Selections for CH0+ S/H Input for MUX A Input Multiplexer Setting bit
     ADCON2bits.CSCNA=1; 
     /// 0011 = Interrupts at the completion of conversion for each 4th sample/convert sequence
-    ADCON2bits.SMPI=2;
+    ADCON2bits.SMPI=0;
     /// 0 = Buffer configured as one 16-word buffer ADCBUF(15...0)
     ADCON2bits.BUFM=0;
     /// 0 = Always use MUX A input multiplexer settings for all samples
@@ -72,7 +66,7 @@ void InitADC(void)
     ADCHSbits.CH0SB=0;
 
     /// 1 = Select ANx for input scan, 0 = Skip ANx for input scan
-    ADCSSL=0b0001001000000010; 
+    ADCSSL=0b0000000000000010; 
     /// 1 - Starts sampling after the last finished conversion
     ADCON1bits.ASAM=1; 
     /// AD conversion interrupt flag is up

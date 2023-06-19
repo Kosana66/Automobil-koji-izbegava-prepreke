@@ -25,8 +25,8 @@ IN4 =               IN4 =
 
 #define IN1         LATBbits.LATB10 
 #define IN2         LATBbits.LATB11
-#define IN3         LATFbits.LATF0 
-#define IN4         LATFbits.LATF1 
+#define IN3         LATFbits.LATF1 
+#define IN4         LATFbits.LATF0 
 
 
 
