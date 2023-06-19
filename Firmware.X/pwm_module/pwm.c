@@ -38,11 +38,11 @@ void InitPWM()
 }
 
 /* 
- * @brief - Function for setting duty cycle for PWM
+ * @brief - Function for setting duty cycle for PWM1
  * @param duty_cycle - The value from 0 to 100
  * @return None
  */
-void DutyCyclePWM(int duty_cycle)
+void DutyCyclePWM1(int duty_cycle)
 {
     if(duty_cycle>=0 && duty_cycle<=100)
     {
@@ -51,6 +51,22 @@ void DutyCyclePWM(int duty_cycle)
 
         // Set the new duty cycle
         OC1RS = (int)pwm_value;   
+    }
+}
+
+/* 
+ * @brief - Function for setting duty cycle for PWM2
+ * @param duty_cycle - The value from 0 to 100
+ * @return None
+ */
+void DutyCyclePWM2(int duty_cycle)
+{
+    if(duty_cycle>=0 && duty_cycle<=100)
+    {
+        // Calculate the duty cycle based on the given value from 0.0 to 1.0
+        float pwm_value = (float)duty_cycle * (TMR3_period-1) /100;
+
+        // Set the new duty cycle
         OC2RS = (int)pwm_value;
     }
 }

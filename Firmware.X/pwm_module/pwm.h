@@ -14,8 +14,11 @@
 /// Function for initializing PWM module
 void InitPWM();
 
-/// Function for setting duty cycle for PWM
-void DutyCyclePWM(int duty_cycle);
+/// Function for setting duty cycle for PWM1
+void DutyCyclePWM1(int duty_cycle);
+
+/// Function for setting duty cycle for PWM2
+void DutyCyclePWM2(int duty_cycle);
 
 #endif	/* PWM_H */
 

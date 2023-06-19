@@ -41,7 +41,8 @@ static int us_counter, ms_counter;
 static unsigned char tempRX1_debug, tempRX2_bluetooth;
 static unsigned char word_start[SIZE_OF_WORD];
 static unsigned char position_UART2=0;
-static int duty_cycle_entered;
+static int duty_cycle_entered1;
+static int duty_cycle_entered2;
 static float measured_distance_left = 0;
 static float measured_distance_right = 0;
 static unsigned char time_overflow_left=0;
@@ -176,8 +177,10 @@ int main(int argc, char** argv) {
     InitPWM();
     ConfigureHCSR04Pins();
     ConfigureMotorsPins(); 
-    duty_cycle_entered = 80;
-    DutyCyclePWM(duty_cycle_entered);
+    duty_cycle_entered1 = 75;
+    DutyCyclePWM1(duty_cycle_entered1);
+    duty_cycle_entered2 = 78;
+    DutyCyclePWM2(duty_cycle_entered2);
     
     TRISBbits.TRISB8 = 0;
     ADPCFGbits.PCFG8 = 1;
@@ -205,81 +208,70 @@ int main(int argc, char** argv) {
         LATBbits.LATB8 = ~LATBbits.LATB8;
         
         
-        DriveForward();
-        MeasureLeftDistance();
-        MeasureRightDistance();
-                
-       MeasureFrontDistance();
-        if(sharp_value > 1100)
-        {
-            WriteStringUART2("prepreka napred ");
-            StopMotors();
-            DelayMs(1000);
-            TurnLeft();
-            DelayMs(1400);
-            StopMotors();
-            DelayMs(1000);
-        }
-       /* 
-        
-        ChangeDutyCycle();
-        TurnLeft();
-            WriteStringUART2("levo");
-            WriteCharUART2(13);
-        DelayMs(2000);
-        StopMotors();
-        DelayMs(2000);
-        TurnRight();
-            WriteStringUART2("desno");
-            WriteCharUART2(13);
-        DelayMs(2000);
-        StopMotors();
-        DelayMs(2000);
-        
-        
+        DriveForward();                
         MeasureFrontDistance();
-        MeasureRightDistance();
-        MeasureLeftDistance();
-        
-        WriteStringUART2("Front distance: ");
-        WriteObstacleDistance2(sharp_value);
-        WriteCharUART2(13);
-        DelayMs(1000);
-        WriteStringUART2("Left distance: ");
-        WriteObstacleDistance2(measured_distance_left);
-        WriteCharUART2(13);
-        DelayMs(1000);
-        WriteStringUART2("Right distance: ");
-        WriteObstacleDistance2(measured_distance_right);
-        WriteCharUART2(13);
-        DelayMs(1000);
-        ChangeDutyCycle();
-        * 
-        * 
-        */
-        
-       
-       /* 
-        
-        
-        if(sharp_value > 600) 
+        if(sharp_value > 800)
+        {
+            StopMotors();
+            DelayMs(400);
+            MeasureLeftDistance();
+            if(measured_distance_left > 15)
+            {
+                TurnLeft();
+                DelayMs(1300);
+                StopMotors();
+                DelayMs(400);
+            }
+            else
+            {
+                MeasureRightDistance();
+                if(measured_distance_right > 16)
+                {
+                    TurnRight();
+                    DelayMs(1300);
+                    StopMotors();
+                    DelayMs(400);
+                }
+                else
+                {
+                    StopMotors();
+                }
+            }
+        }
+        else
+        {
+            MeasureLeftDistance();
+            while(measured_distance_left < 15)
             {
                 StopMotors();
-                DelayMs(1000);
-                if(measured_distance_left > 12.5) 
+                DelayMs(400);
+                TurnRight();
+                DelayMs(80);
+                MeasureLeftDistance();
+                if(measured_distance_left >= 15)
                 {
-                    TurnLeft();
-                    DelayMs(3000);
                     StopMotors();
-                    DelayMs(1000);
+                    DelayMs(400);
+                    DriveForward();
                 }
-                TurnLeft();
-                DelayMs(3000);
-                StopMotors();
-                DelayMs(1000);
             }
- 
-        */
+            MeasureRightDistance();
+            while(measured_distance_right < 16)
+            {
+                StopMotors();
+                DelayMs(400);
+                TurnLeft();
+                DelayMs(80);
+                MeasureRightDistance();
+                if(measured_distance_right >= 16)
+                {
+                    StopMotors();
+                    DelayMs(400);
+                    DriveForward();
+                }
+            }
+        }
+       
     }
     return (EXIT_SUCCESS);
 }
@@ -402,19 +394,35 @@ static void MeasureRightDistance()
  */
 static void ChangeDutyCycle()
 {
-    if(tempRX1_debug == '+' && duty_cycle_entered <= 90)
+    if(tempRX1_debug == '+')
     {
+        if(duty_cycle_entered1 <= 90)
+        {
+            duty_cycle_entered1 += 10;
+            DutyCyclePWM1(duty_cycle_entered1);
+        }
+        if(duty_cycle_entered2 <= 90)
+        {
+            duty_cycle_entered2 += 10;
+            DutyCyclePWM2(duty_cycle_entered2);
+        }
         tempRX1_debug = 0;
-        duty_cycle_entered += 10;
-        DutyCyclePWM(duty_cycle_entered);
         WriteStringUART1("Duty cycle was increased.");
     }
 
-    else if(tempRX1_debug == '-' && duty_cycle_entered >= 10)
+    else if(tempRX1_debug == '-')
     {
+        if(duty_cycle_entered1  >= 10)
+        {
+            duty_cycle_entered1 -= 10;
+            DutyCyclePWM1(duty_cycle_entered1);
+        }
+        if(duty_cycle_entered2 >= 10)
+        {
+            duty_cycle_entered2 -= 10;
+            DutyCyclePWM2(duty_cycle_entered2);
+        }
         tempRX1_debug = 0;
-        duty_cycle_entered -= 10;
-        DutyCyclePWM(duty_cycle_entered);
         WriteStringUART1("Duty cycle was decreased.");
     } 
 }
