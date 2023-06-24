@@ -93,6 +93,7 @@ void __attribute__ ((__interrupt__, no_auto_psv)) _T5Interrupt(void)
     time_overflow_right = 1;
     IFS1bits.T5IF = 0;     
 }
+
 /// Interrupt Service Routine(ISR) for AD conversion - front position sensor
 void __attribute__ ((__interrupt__, no_auto_psv)) _ADCInterrupt(void) 
 {
@@ -101,7 +102,6 @@ void __attribute__ ((__interrupt__, no_auto_psv)) _ADCInterrupt(void)
     ADCON1bits.ADON = 0;
     IFS0bits.ADIF = 0;
 } 
-
 
 /// Interrupt Service Routine(ISR) for UART1
 void __attribute__ ((__interrupt__, no_auto_psv)) _U1RXInterrupt(void) 
@@ -186,7 +186,6 @@ int main(int argc, char** argv) {
     ADPCFGbits.PCFG8 = 1;
     LATBbits.LATB8 = 1;
     
-    
     memset(word_start, 0, sizeof(word_start));  
     position_UART2 = 0;
     WriteStringUART2("Write START.");
@@ -200,78 +199,80 @@ int main(int argc, char** argv) {
     );
     WriteStringUART2("The car is started.");
     WriteCharUART2(13);
-    
-     
-    
+
     while(1)
     {    
         LATBbits.LATB8 = ~LATBbits.LATB8;
         
-        
-        DriveForward();                
+        /// algorithm of movement
+        DriveForward();  
         MeasureFrontDistance();
-        if(sharp_value > 800)
+        if(sharp_value > 680)   //ADC=680 if distance=15cm
         {
             StopMotors();
-            DelayMs(400);
+            DelayMs(300);
             MeasureLeftDistance();
-            if(measured_distance_left > 15)
+            if(measured_distance_left > 20)     // the left sensor is 5cm away from the tank's track
             {
+                //  Turn left if you have a front obstacle and no left obstacle
                 TurnLeft();
                 DelayMs(1300);
                 StopMotors();
-                DelayMs(400);
+                DelayMs(300);
             }
             else
             {
                 MeasureRightDistance();
-                if(measured_distance_right > 16)
+                if(measured_distance_right > 21) // the right sensor is 6cm away from the tank's track
                 {
+                    //  Turn left if you have a front and left obstacle and no right obstacle
                     TurnRight();
                     DelayMs(1300);
                     StopMotors();
-                    DelayMs(400);
+                    DelayMs(300);
                 }
                 else
                 {
+                    //  Stop if you have a front, left and right obstacle
                     StopMotors();
+                    while(1);
                 }
             }
         }
         else
         {
             MeasureLeftDistance();
-            while(measured_distance_left < 15)
+            while(measured_distance_left < 20)
             {
                 StopMotors();
-                DelayMs(400);
+                DelayMs(300);
                 TurnRight();
                 DelayMs(80);
                 MeasureLeftDistance();
-                if(measured_distance_left >= 15)
+                if(measured_distance_left >= 20)
                 {
                     StopMotors();
-                    DelayMs(400);
+                    DelayMs(300);
                     DriveForward();
                 }
             }
             MeasureRightDistance();
-            while(measured_distance_right < 16)
+            while(measured_distance_right < 21)
             {
                 StopMotors();
-                DelayMs(400);
+                DelayMs(300);
                 TurnLeft();
                 DelayMs(80);
                 MeasureRightDistance();
-                if(measured_distance_right >= 16)
+                if(measured_distance_right >= 21)
                 {
                     StopMotors();
-                    DelayMs(400);
+                    DelayMs(300);
                     DriveForward();
                 }
             }
         }
-       
+        ChangeDutyCycle();
     }
     return (EXIT_SUCCESS);
 }
@@ -316,7 +317,6 @@ static void MeasureFrontDistance()
     ADCON1bits.ADON=1;
     DelayMs(10);
     ADCON1bits.ADON=0;
-    // potrebno je izmereni napon pretvoriti u udaljenost
 }
 
 /* 
@@ -396,33 +396,33 @@ static void ChangeDutyCycle()
 {
     if(tempRX1_debug == '+')
     {
-        if(duty_cycle_entered1 <= 90)
+        if(duty_cycle_entered1 <= 95)
         {
-            duty_cycle_entered1 += 10;
+            duty_cycle_entered1 += 5;
             DutyCyclePWM1(duty_cycle_entered1);
         }
-        if(duty_cycle_entered2 <= 90)
+        if(duty_cycle_entered2 <= 95)
         {
-            duty_cycle_entered2 += 10;
+            duty_cycle_entered2 += 5;
             DutyCyclePWM2(duty_cycle_entered2);
         }
         tempRX1_debug = 0;
-        WriteStringUART1("Duty cycle was increased.");
+        WriteStringUART1("The duty cycle was increased.");
     }
 
     else if(tempRX1_debug == '-')
     {
-        if(duty_cycle_entered1  >= 10)
+        if(duty_cycle_entered1  >= 5)
         {
-            duty_cycle_entered1 -= 10;
+            duty_cycle_entered1 -= 5;
             DutyCyclePWM1(duty_cycle_entered1);
         }
-        if(duty_cycle_entered2 >= 10)
+        if(duty_cycle_entered2 >= 5)
         {
-            duty_cycle_entered2 -= 10;
+            duty_cycle_entered2 -= 5;
             DutyCyclePWM2(duty_cycle_entered2);
         }
         tempRX1_debug = 0;
-        WriteStringUART1("Duty cycle was decreased.");
+        WriteStringUART1("The duty cycle was decreased.");
     } 
 }

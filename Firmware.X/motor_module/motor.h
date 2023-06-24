@@ -8,27 +8,15 @@
 #ifndef MOTOR_H
 #define	MOTOR_H
 
-///library for MCU
+/// library for MCU
 #include <p30fxxxx.h>
-/*
-FRONT MOTOR
- forward           backward
-IN1 =               IN1 =
-IN2 =               IN2 =
 
-BACK MOTOR
- forward         backward
-IN3 =               IN3 =
-IN4 =               IN4 =
- 
-*/
-
-#define IN1         LATBbits.LATB10 
-#define IN2         LATBbits.LATB11
-#define IN3         LATFbits.LATF1 
-#define IN4         LATFbits.LATF0 
-
-
+// IN1 , IN2 for right motor
+#define IN1     LATBbits.LATB10 
+#define IN2     LATBbits.LATB11
+// IN3 , IN4 for left motor
+#define IN3     LATFbits.LATF1 
+#define IN4     LATFbits.LATF0 
 
 /// Function for configuring pins for motors
 void ConfigureMotorsPins();

@@ -31,10 +31,8 @@ void ConfigureMotorsPins()
  */
 void StopMotors()
 {
-    //in1 , in2 for right motor
     IN1=0;
     IN2=0;
-    //in3 , in4 for left motor
     IN3=0;
     IN4=0;
 }
