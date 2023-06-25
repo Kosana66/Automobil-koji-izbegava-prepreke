@@ -209,6 +209,8 @@ int main(int argc, char** argv) {
         MeasureFrontDistance();
         if(sharp_value > 680)   //ADC=680 if distance=15cm
         {
+            WriteStringUART2("There is an obstacle ahead ");
+            WriteCharUART2(13);
             StopMotors();
             DelayMs(300);
             MeasureLeftDistance();
@@ -222,6 +224,10 @@ int main(int argc, char** argv) {
             }
             else
             {
+                WriteStringUART2("There is an obstacle on the left side at a distance of ");
+                WriteObstacleDistance2(measured_distance_left);
+                WriteStringUART2(" cm.");
+                WriteCharUART2(13);
                 MeasureRightDistance();
                 if(measured_distance_right > 21) // the right sensor is 6cm away from the tank's track
                 {
@@ -233,6 +239,10 @@ int main(int argc, char** argv) {
                 }
                 else
                 {
+                    WriteStringUART2("There is an obstacle on the right side at a distance of ");
+                    WriteObstacleDistance2(measured_distance_right);
+                    WriteStringUART2(" cm.");
+                    WriteCharUART2(13);
                     //  Stop if you have a front, left and right obstacle
                     StopMotors();
                     while(1);
@@ -244,6 +254,10 @@ int main(int argc, char** argv) {
             MeasureLeftDistance();
             while(measured_distance_left < 20)
             {
+                WriteStringUART2("There is an obstacle on the left side at a distance of ");
+                WriteObstacleDistance2(measured_distance_left);
+                WriteStringUART2(" cm.");
+                WriteCharUART2(13);
                 StopMotors();
                 DelayMs(300);
                 TurnRight();
@@ -259,6 +273,10 @@ int main(int argc, char** argv) {
             MeasureRightDistance();
             while(measured_distance_right < 21)
             {
+                WriteStringUART2("There is an obstacle on the right side at a distance of ");
+                WriteObstacleDistance2(measured_distance_right);
+                WriteStringUART2(" cm.");
+                WriteCharUART2(13);
                 StopMotors();
                 DelayMs(300);
                 TurnLeft();

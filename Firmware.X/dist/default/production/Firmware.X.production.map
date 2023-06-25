@@ -119,11 +119,11 @@ Default Scalar Model: Small
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x100               0xad4          0x103e  (4158)
-.const                       0xbd4                0x5e            0x8d  (141)
-.text                        0xc32               0x792           0xb5b  (2907)
-.dinit                      0x13c4                 0xe            0x15  (21)
+.const                       0xbd4                0xf0           0x168  (360)
+.text                        0xcc4               0x7e2           0xbd3  (3027)
+.dinit                      0x14a6                 0xe            0x15  (21)
 
-                 Total "program" memory used (bytes):         0x1c3b  (7227) 14%
+                 Total "program" memory used (bytes):         0x1d8e  (7566) 15%
 
 
 "data" Memory  [Origin = 0x800, Length = 0x800]
@@ -196,62 +196,62 @@ External Symbols in Program Memory (by address):
                   0x000bc8                  ___mulsi3
                   0x000bc8                  ___mulp32peds3
                   0x000bc8                  ___mulp32eds3
-                  0x000c32                  _main
-                  0x000f32                  _InitUART1
-                  0x000f4c                  _WriteCharUART1
-                  0x000f74                  _WriteStringUART1
-                  0x000fa4                  _WriteUART1dec2string
-                  0x001026                  _InitUART2
-                  0x00103e                  _WriteCharUART2
-                  0x001066                  _WriteStringUART2
-                  0x001082                  _WriteUART2dec2string
-                  0x001104                  _WriteObstacleDistance2
-                  0x0011de                  _InitPWM
-                  0x00120e                  _DutyCyclePWM1
-                  0x001248                  _DutyCyclePWM2
-                  0x001282                  _ConfigureADCPins
-                  0x00128c                  _InitADC
-                  0x0012ee                  _Init_T1
-                  0x001302                  _Init_T2
-                  0x001316                  _Init_T3
-                  0x001332                  _Init_T4
-                  0x001346                  _Init_T5
-                  0x00135a                  _ConfigureMotorsPins
-                  0x00136c                  _StopMotors
-                  0x00137a                  _DriveForward
-                  0x001388                  _DriveBackward
-                  0x001396                  _TurnLeft
-                  0x0013a4                  _TurnRight
-                  0x0013b2                  _ConfigureHCSR04Pins
+                  0x000cc4                  _main
+                  0x001014                  _InitUART1
+                  0x00102e                  _WriteCharUART1
+                  0x001056                  _WriteStringUART1
+                  0x001086                  _WriteUART1dec2string
+                  0x001108                  _InitUART2
+                  0x001120                  _WriteCharUART2
+                  0x001148                  _WriteStringUART2
+                  0x001164                  _WriteUART2dec2string
+                  0x0011e6                  _WriteObstacleDistance2
+                  0x0012c0                  _InitPWM
+                  0x0012f0                  _DutyCyclePWM1
+                  0x00132a                  _DutyCyclePWM2
+                  0x001364                  _ConfigureADCPins
+                  0x00136e                  _InitADC
+                  0x0013d0                  _Init_T1
+                  0x0013e4                  _Init_T2
+                  0x0013f8                  _Init_T3
+                  0x001414                  _Init_T4
+                  0x001428                  _Init_T5
+                  0x00143c                  _ConfigureMotorsPins
+                  0x00144e                  _StopMotors
+                  0x00145c                  _DriveForward
+                  0x00146a                  _DriveBackward
+                  0x001478                  _TurnLeft
+                  0x001486                  _TurnRight
+                  0x001494                  _ConfigureHCSR04Pins
 
 External Symbols in Program Memory (by name):
 
-                  0x001282                  _ConfigureADCPins
-                  0x0013b2                  _ConfigureHCSR04Pins
-                  0x00135a                  _ConfigureMotorsPins
-                  0x001388                  _DriveBackward
-                  0x00137a                  _DriveForward
-                  0x00120e                  _DutyCyclePWM1
-                  0x001248                  _DutyCyclePWM2
-                  0x00128c                  _InitADC
-                  0x0011de                  _InitPWM
-                  0x000f32                  _InitUART1
-                  0x001026                  _InitUART2
-                  0x0012ee                  _Init_T1
-                  0x001302                  _Init_T2
-                  0x001316                  _Init_T3
-                  0x001332                  _Init_T4
-                  0x001346                  _Init_T5
-                  0x00136c                  _StopMotors
-                  0x001396                  _TurnLeft
-                  0x0013a4                  _TurnRight
-                  0x000f4c                  _WriteCharUART1
-                  0x00103e                  _WriteCharUART2
-                  0x001104                  _WriteObstacleDistance2
-                  0x000f74                  _WriteStringUART1
-                  0x001066                  _WriteStringUART2
-                  0x000fa4                  _WriteUART1dec2string
-                  0x001082                  _WriteUART2dec2string
+                  0x001364                  _ConfigureADCPins
+                  0x001494                  _ConfigureHCSR04Pins
+                  0x00143c                  _ConfigureMotorsPins
+                  0x00146a                  _DriveBackward
+                  0x00145c                  _DriveForward
+                  0x0012f0                  _DutyCyclePWM1
+                  0x00132a                  _DutyCyclePWM2
+                  0x00136e                  _InitADC
+                  0x0012c0                  _InitPWM
+                  0x001014                  _InitUART1
+                  0x001108                  _InitUART2
+                  0x0013d0                  _Init_T1
+                  0x0013e4                  _Init_T2
+                  0x0013f8                  _Init_T3
+                  0x001414                  _Init_T4
+                  0x001428                  _Init_T5
+                  0x00144e                  _StopMotors
+                  0x001478                  _TurnLeft
+                  0x001486                  _TurnRight
+                  0x00102e                  _WriteCharUART1
+                  0x001120                  _WriteCharUART2
+                  0x0011e6                  _WriteObstacleDistance2
+                  0x001056                  _WriteStringUART1
+                  0x001148                  _WriteStringUART2
+                  0x001086                  _WriteUART1dec2string
+                  0x001164                  _WriteUART2dec2string
                   0x000222                  __ADCInterrupt
                   0x00028e                  __DefaultInterrupt
                   0x0001c8                  __T1Interrupt
@@ -298,7 +298,7 @@ External Symbols in Program Memory (by name):
                   0x0008a0                  __typef
                   0x000842                  __unpackdnrmf
                   0x00098c                  __unpackf
-                  0x000c32                  _main
+                  0x000cc4                  _main
                   0x000b02                  _memset
 
 Memory Configuration
@@ -570,38 +570,38 @@ userdata
  .debug_abbrev    0x0007e0         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(funpack2.XX_o)
  .debug_abbrev    0x0007f4         0x14 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.XX_o)
 
-.debug_line       0x000000       0x1298
+.debug_line       0x000000       0x12aa
  *(.debug_line)
- .debug_line      0x000000        0x1e5 build/default/production/newmain.o
- .debug_line      0x0001e5        0x11f build/default/production/adc_module/adc.o
- .debug_line      0x000304        0x132 build/default/production/timer_module/timer.o
- .debug_line      0x000436        0x168 build/default/production/uart_module/uart.o
- .debug_line      0x00059e        0x120 build/default/production/pwm_module/pwm.o
- .debug_line      0x0006be        0x113 build/default/production/digital_sensors/HCSR.o
- .debug_line      0x0007d1        0x12f build/default/production/motor_module/motor.o
- .debug_line      0x000900         0x37 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(feqltle.XX_o)
- .debug_line      0x000937         0x35 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fgtge.XX_o)
- .debug_line      0x00096c         0x56 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fixsfsi.XX_o)
- .debug_line      0x0009c2         0x53 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fixunssfsi.XX_o)
- .debug_line      0x000a15         0x3a c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(floatsisf.XX_o)
- .debug_line      0x000a4f         0x3b c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(floatunsisf.XX_o)
- .debug_line      0x000a8a         0x4a c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(funpack.XX_o)
- .debug_line      0x000ad4        0x136 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(addsf3x.XX_o)
- .debug_line      0x000c0a        0x124 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(divsf3x.XX_o)
- .debug_line      0x000d2e         0xcc c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(mulsf3x.XX_o)
- .debug_line      0x000dfa         0x72 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(dnrmpackfx.XX_o)
- .debug_line      0x000e6c         0x7a c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(unpackdnrmfx.XX_o)
- .debug_line      0x000ee6         0x5e c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(typefx.XX_o)
- .debug_line      0x000f44         0x51 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(propnanfx.XX_o)
- .debug_line      0x000f95         0x98 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(spackfx.XX_o)
- .debug_line      0x00102d         0x79 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(unpackfx.XX_o)
- .debug_line      0x0010a6         0x1a c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(errno.XX_o)
- .debug_line      0x0010c0         0x53 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fcompare.XX_o)
- .debug_line      0x001113         0x47 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(floatdisf.XX_o)
- .debug_line      0x00115a         0x6c c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(floatundisf.XX_o)
- .debug_line      0x0011c6         0x5a c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fpack.XX_o)
- .debug_line      0x001220         0x3e c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(funpack2.XX_o)
- .debug_line      0x00125e         0x3a c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.XX_o)
+ .debug_line      0x000000        0x1f7 build/default/production/newmain.o
+ .debug_line      0x0001f7        0x11f build/default/production/adc_module/adc.o
+ .debug_line      0x000316        0x132 build/default/production/timer_module/timer.o
+ .debug_line      0x000448        0x168 build/default/production/uart_module/uart.o
+ .debug_line      0x0005b0        0x120 build/default/production/pwm_module/pwm.o
+ .debug_line      0x0006d0        0x113 build/default/production/digital_sensors/HCSR.o
+ .debug_line      0x0007e3        0x12f build/default/production/motor_module/motor.o
+ .debug_line      0x000912         0x37 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(feqltle.XX_o)
+ .debug_line      0x000949         0x35 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fgtge.XX_o)
+ .debug_line      0x00097e         0x56 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fixsfsi.XX_o)
+ .debug_line      0x0009d4         0x53 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fixunssfsi.XX_o)
+ .debug_line      0x000a27         0x3a c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(floatsisf.XX_o)
+ .debug_line      0x000a61         0x3b c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(floatunsisf.XX_o)
+ .debug_line      0x000a9c         0x4a c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(funpack.XX_o)
+ .debug_line      0x000ae6        0x136 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(addsf3x.XX_o)
+ .debug_line      0x000c1c        0x124 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(divsf3x.XX_o)
+ .debug_line      0x000d40         0xcc c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(mulsf3x.XX_o)
+ .debug_line      0x000e0c         0x72 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(dnrmpackfx.XX_o)
+ .debug_line      0x000e7e         0x7a c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(unpackdnrmfx.XX_o)
+ .debug_line      0x000ef8         0x5e c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(typefx.XX_o)
+ .debug_line      0x000f56         0x51 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(propnanfx.XX_o)
+ .debug_line      0x000fa7         0x98 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(spackfx.XX_o)
+ .debug_line      0x00103f         0x79 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(unpackfx.XX_o)
+ .debug_line      0x0010b8         0x1a c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(errno.XX_o)
+ .debug_line      0x0010d2         0x53 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fcompare.XX_o)
+ .debug_line      0x001125         0x47 c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(floatdisf.XX_o)
+ .debug_line      0x00116c         0x6c c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(floatundisf.XX_o)
+ .debug_line      0x0011d8         0x5a c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(fpack.XX_o)
+ .debug_line      0x001232         0x3e c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(funpack2.XX_o)
+ .debug_line      0x001270         0x3a c:/program files/microchip/xc16/v2.00/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.XX_o)
 
 .debug_frame      0x000000        0x51c
  *(.debug_frame)
@@ -1525,44 +1525,44 @@ __c30_signature
  .ivt._U2RXInterrupt
                   0x000044          0x2 build/default/production/newmain.o
 
-.const              0x8bd4         0x5e load address 0x000bd4  
- .const             0x8bd4         0x5e build/default/production/newmain.o
+.const              0x8bd4         0xf0 load address 0x000bd4  
+ .const             0x8bd4         0xf0 build/default/production/newmain.o
 
-.text             0x000c32        0x792
- .text            0x000c32        0x300 build/default/production/newmain.o
-                  0x000c32                  _main
- .text            0x000f32        0x2ac build/default/production/uart_module/uart.o
-                  0x000f32                  _InitUART1
-                  0x000f4c                  _WriteCharUART1
-                  0x000f74                  _WriteStringUART1
-                  0x000fa4                  _WriteUART1dec2string
-                  0x001026                  _InitUART2
-                  0x00103e                  _WriteCharUART2
-                  0x001066                  _WriteStringUART2
-                  0x001082                  _WriteUART2dec2string
-                  0x001104                  _WriteObstacleDistance2
- .text            0x0011de         0xa4 build/default/production/pwm_module/pwm.o
-                  0x0011de                  _InitPWM
-                  0x00120e                  _DutyCyclePWM1
-                  0x001248                  _DutyCyclePWM2
- .text            0x001282         0x6c build/default/production/adc_module/adc.o
-                  0x001282                  _ConfigureADCPins
-                  0x00128c                  _InitADC
- .text            0x0012ee         0x6c build/default/production/timer_module/timer.o
-                  0x0012ee                  _Init_T1
-                  0x001302                  _Init_T2
-                  0x001316                  _Init_T3
-                  0x001332                  _Init_T4
-                  0x001346                  _Init_T5
- .text            0x00135a         0x58 build/default/production/motor_module/motor.o
-                  0x00135a                  _ConfigureMotorsPins
-                  0x00136c                  _StopMotors
-                  0x00137a                  _DriveForward
-                  0x001388                  _DriveBackward
-                  0x001396                  _TurnLeft
-                  0x0013a4                  _TurnRight
- .text            0x0013b2         0x12 build/default/production/digital_sensors/HCSR.o
-                  0x0013b2                  _ConfigureHCSR04Pins
+.text             0x000cc4        0x7e2
+ .text            0x000cc4        0x350 build/default/production/newmain.o
+                  0x000cc4                  _main
+ .text            0x001014        0x2ac build/default/production/uart_module/uart.o
+                  0x001014                  _InitUART1
+                  0x00102e                  _WriteCharUART1
+                  0x001056                  _WriteStringUART1
+                  0x001086                  _WriteUART1dec2string
+                  0x001108                  _InitUART2
+                  0x001120                  _WriteCharUART2
+                  0x001148                  _WriteStringUART2
+                  0x001164                  _WriteUART2dec2string
+                  0x0011e6                  _WriteObstacleDistance2
+ .text            0x0012c0         0xa4 build/default/production/pwm_module/pwm.o
+                  0x0012c0                  _InitPWM
+                  0x0012f0                  _DutyCyclePWM1
+                  0x00132a                  _DutyCyclePWM2
+ .text            0x001364         0x6c build/default/production/adc_module/adc.o
+                  0x001364                  _ConfigureADCPins
+                  0x00136e                  _InitADC
+ .text            0x0013d0         0x6c build/default/production/timer_module/timer.o
+                  0x0013d0                  _Init_T1
+                  0x0013e4                  _Init_T2
+                  0x0013f8                  _Init_T3
+                  0x001414                  _Init_T4
+                  0x001428                  _Init_T5
+ .text            0x00143c         0x58 build/default/production/motor_module/motor.o
+                  0x00143c                  _ConfigureMotorsPins
+                  0x00144e                  _StopMotors
+                  0x00145c                  _DriveForward
+                  0x00146a                  _DriveBackward
+                  0x001478                  _TurnLeft
+                  0x001486                  _TurnRight
+ .text            0x001494         0x12 build/default/production/digital_sensors/HCSR.o
+                  0x001494                  _ConfigureHCSR04Pins
 
-.dinit            0x0013c4          0xe
- .dinit           0x0013c4          0xe data_init
+.dinit            0x0014a6          0xe
+ .dinit           0x0014a6          0xe data_init
